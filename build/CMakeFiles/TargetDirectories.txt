@@ -1,0 +1,3 @@
+/home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles/final_project_el_formilador_y_el_regulador.dir
+/home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles/edit_cache.dir
+/home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles/rebuild_cache.dir
