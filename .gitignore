@@ -30,3 +30,28 @@
 *.exe
 *.out
 *.app
+
+# Carpeta de compilación
+/build/
+
+# Archivos intermedios y binarios
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# Archivos de CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Archivos de VSCode
+.vscode/
+
+# Archivos de sistema (opcional)
+.DS_Store
+Thumbs.db
