@@ -54,16 +54,16 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador
+CMAKE_SOURCE_DIR = /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build
+CMAKE_BINARY_DIR = /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/final_project_el_formilador_y_el_regulador.dir/all
+all: CMakeFiles/final-project-el-formilador-y-el-regulador.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/final_project_el_formilador_y_el_regulador.dir/clean
+clean: CMakeFiles/final-project-el-formilador-y-el-regulador.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/final_project_el_formilador_y_el_regulador.dir
+# Target rules for target CMakeFiles/final-project-el-formilador-y-el-regulador.dir
 
 # All Build rule for target.
-CMakeFiles/final_project_el_formilador_y_el_regulador.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles --progress-num=1,2 "Built target final_project_el_formilador_y_el_regulador"
-.PHONY : CMakeFiles/final_project_el_formilador_y_el_regulador.dir/all
+CMakeFiles/final-project-el-formilador-y-el-regulador.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles --progress-num=1,2,3,4 "Built target final-project-el-formilador-y-el-regulador"
+.PHONY : CMakeFiles/final-project-el-formilador-y-el-regulador.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/final_project_el_formilador_y_el_regulador.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/final_project_el_formilador_y_el_regulador.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles 0
-.PHONY : CMakeFiles/final_project_el_formilador_y_el_regulador.dir/rule
+CMakeFiles/final-project-el-formilador-y-el-regulador.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/final-project-el-formilador-y-el-regulador.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles 0
+.PHONY : CMakeFiles/final-project-el-formilador-y-el-regulador.dir/rule
 
 # Convenience name for target.
-final_project_el_formilador_y_el_regulador: CMakeFiles/final_project_el_formilador_y_el_regulador.dir/rule
-.PHONY : final_project_el_formilador_y_el_regulador
+final-project-el-formilador-y-el-regulador: CMakeFiles/final-project-el-formilador-y-el-regulador.dir/rule
+.PHONY : final-project-el-formilador-y-el-regulador
 
 # clean rule for target.
-CMakeFiles/final_project_el_formilador_y_el_regulador.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/clean
-.PHONY : CMakeFiles/final_project_el_formilador_y_el_regulador.dir/clean
+CMakeFiles/final-project-el-formilador-y-el-regulador.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/clean
+.PHONY : CMakeFiles/final-project-el-formilador-y-el-regulador.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

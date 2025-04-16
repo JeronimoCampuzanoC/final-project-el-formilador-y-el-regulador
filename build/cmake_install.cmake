@@ -1,4 +1,4 @@
-# Install script for directory: /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador
+# Install script for directory: /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

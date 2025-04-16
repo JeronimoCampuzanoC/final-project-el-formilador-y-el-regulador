@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador
+CMAKE_SOURCE_DIR = /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build
+CMAKE_BINARY_DIR = /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,72 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named final_project_el_formilador_y_el_regulador
+# Target rules for targets named final-project-el-formilador-y-el-regulador
 
 # Build rule for target.
-final_project_el_formilador_y_el_regulador: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 final_project_el_formilador_y_el_regulador
-.PHONY : final_project_el_formilador_y_el_regulador
+final-project-el-formilador-y-el-regulador: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 final-project-el-formilador-y-el-regulador
+.PHONY : final-project-el-formilador-y-el-regulador
 
 # fast build rule for target.
-final_project_el_formilador_y_el_regulador/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build
-.PHONY : final_project_el_formilador_y_el_regulador/fast
+final-project-el-formilador-y-el-regulador/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build
+.PHONY : final-project-el-formilador-y-el-regulador/fast
+
+src/Grammar.o: src/Grammar.cpp.o
+.PHONY : src/Grammar.o
+
+# target to build an object file
+src/Grammar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/Grammar.cpp.o
+.PHONY : src/Grammar.cpp.o
+
+src/Grammar.i: src/Grammar.cpp.i
+.PHONY : src/Grammar.i
+
+# target to preprocess a source file
+src/Grammar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/Grammar.cpp.i
+.PHONY : src/Grammar.cpp.i
+
+src/Grammar.s: src/Grammar.cpp.s
+.PHONY : src/Grammar.s
+
+# target to generate assembly for a file
+src/Grammar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/Grammar.cpp.s
+.PHONY : src/Grammar.cpp.s
+
+src/Reader.o: src/Reader.cpp.o
+.PHONY : src/Reader.o
+
+# target to build an object file
+src/Reader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/Reader.cpp.o
+.PHONY : src/Reader.cpp.o
+
+src/Reader.i: src/Reader.cpp.i
+.PHONY : src/Reader.i
+
+# target to preprocess a source file
+src/Reader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/Reader.cpp.i
+.PHONY : src/Reader.cpp.i
+
+src/Reader.s: src/Reader.cpp.s
+.PHONY : src/Reader.s
+
+# target to generate assembly for a file
+src/Reader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/Reader.cpp.s
+.PHONY : src/Reader.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -142,7 +190,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -150,7 +198,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_project_el_formilador_y_el_regulador.dir/build.make CMakeFiles/final_project_el_formilador_y_el_regulador.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final-project-el-formilador-y-el-regulador.dir/build.make CMakeFiles/final-project-el-formilador-y-el-regulador.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -161,7 +209,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... final_project_el_formilador_y_el_regulador"
+	@echo "... final-project-el-formilador-y-el-regulador"
+	@echo "... src/Grammar.o"
+	@echo "... src/Grammar.i"
+	@echo "... src/Grammar.s"
+	@echo "... src/Reader.o"
+	@echo "... src/Reader.i"
+	@echo "... src/Reader.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

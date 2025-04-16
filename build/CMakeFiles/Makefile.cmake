@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/jerocrackh/projects/final-project-el-formilador-y-el-regulador/CMakeLists.txt"
+  "/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/CMakeLists.txt"
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in"
@@ -102,5 +102,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/final_project_el_formilador_y_el_regulador.dir/DependInfo.cmake"
+  "CMakeFiles/final-project-el-formilador-y-el-regulador.dir/DependInfo.cmake"
   )
