@@ -16,17 +16,17 @@ int main() {
 
     // Step 2 Proccess rules to determine if it is LL or SLR
 
-    Grammar grammar = new Grammar;
+    Grammar grammar;
 
-    grammar.determineType();
+    // grammar.determineType();
 
-    if (grammar.getType() == "slr") {
-        cout << "The Grammar is a SLR Type" << endl;
-    } else if (grammar.getType() == "ll") {
-        cout << "The Grammar is a LL Type" << endl;
-    } else {
-        cout << "The grammar is neither a SLR Type nor a LL type" << endl;
-    }
+    // if (grammar.getType() == "slr") {
+    //     cout << "The Grammar is a SLR Type" << endl;
+    // } else if (grammar.getType() == "ll") {
+    //     cout << "The Grammar is a LL Type" << endl;
+    // } else {
+    //     cout << "The grammar is neither a SLR Type nor a LL type" << endl;
+    // }
 
 
 

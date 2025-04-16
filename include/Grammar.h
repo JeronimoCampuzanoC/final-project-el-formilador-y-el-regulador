@@ -8,14 +8,10 @@
 
 class Grammar {
 public:
-    void determineType();
     void printRules();
 
-    string getType();  
-
 private:
-    string type;
-    <vector<pair<string, string>>> production_rules;
+    vector< pair<string, string> > production_rules;
     
 };
 

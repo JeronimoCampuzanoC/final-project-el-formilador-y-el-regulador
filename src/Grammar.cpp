@@ -1,11 +1,6 @@
-
-
-void Grammar::determineType() {
-    // Algorithm that determines which type of grammar it is
-    // based on the Production Rules
-}
-
-string Grammar::getType() {
-    return type;
-}
+#include "Grammar.h"
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 
