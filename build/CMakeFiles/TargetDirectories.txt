@@ -1,3 +1,0 @@
-/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles/final-project-el-formilador-y-el-regulador.dir
-/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles/edit_cache.dir
-/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/build/CMakeFiles/rebuild_cache.dir
