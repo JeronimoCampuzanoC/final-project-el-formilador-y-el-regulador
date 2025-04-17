@@ -6,7 +6,7 @@
 
 class Reader {
 public:
-    Grammar readFile(string filePath);
+    Grammar readFile(string fileRoute);
 
 private:
     std::string content;

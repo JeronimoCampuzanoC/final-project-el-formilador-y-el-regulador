@@ -8,15 +8,15 @@ using namespace std;
 int main() {
     // Step 1 Proccess rules in a txt file
     Reader reader;
-    reader.readFile("grammar.txt");
-    
+    Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
+    grammar.printRules();
 
 
 
 
     // Step 2 Proccess rules to determine if it is LL or SLR
 
-    Grammar grammar;
+    
 
     // grammar.determineType();
 
