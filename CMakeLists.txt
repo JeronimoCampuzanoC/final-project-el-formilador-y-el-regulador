@@ -9,11 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 include_directories(include)
 
 # Archivos fuente
-set(SOURCES
-    src/main.cpp
-    src/Reader.cpp
-    src/Grammar.cpp
-)
+file(GLOB SOURCES "src/*.cpp")
 
 # Ejecutable
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(FinalProject ${SOURCES})
