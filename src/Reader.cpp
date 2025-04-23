@@ -17,7 +17,7 @@ using namespace std;
 Grammar Reader::readFile(string fileRoute)
 {
     int numProductions;
-    vector< pair<string, vector<string> > > production_rules;
+    vector< pair<string, string> > production_rules;
     ifstream file(fileRoute.c_str());
     try
     {
@@ -34,7 +34,7 @@ Grammar Reader::readFile(string fileRoute)
     // 1. Read the number of productions
     file >> numProductions;
     string line;
-    getline(file, line);
+    getline(file, line); // burn line
 
     if (numProductions <= 0) {
         cerr << "Invalid number of productions." << endl;
@@ -43,10 +43,9 @@ Grammar Reader::readFile(string fileRoute)
 
     // S -> As Bd Ce 
 
-    //  pair<string, vector<string> > 
+    //  pair<string,string> 
     
     for (int i = 0; i < numProductions; ++i) {
-        cout << numProductions << endl;
         getline(file, line);
 
         string s = line;
@@ -80,11 +79,11 @@ Grammar Reader::readFile(string fileRoute)
         
         // Extraemos palabra por palabra (separa por espacios por defecto)
         while (iss >> palabra) {
-            palabras.push_back(palabra);
+            production_rules.push_back(make_pair(first, palabra));
         }
 
 
-        production_rules.push_back(make_pair(first, palabras));
+        
 
 
     }

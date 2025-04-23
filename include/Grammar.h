@@ -10,13 +10,14 @@ using namespace std;
 
 class Grammar {
 public:
-    Grammar(vector< pair<string, vector<string> > > rules);
-    void setRules(vector< pair<string, vector<string> > >);
-    vector< pair<string, vector<string> > > getRules();
+    Grammar();
+    Grammar(vector< pair<string, string> > rules);
+    void setRules(vector< pair<string, string> >);
+    vector< pair<string, string> > getRules();
     void printRules();
 
 private:
-    vector< pair<string, vector<string> > > production_rules;
+    vector< pair<string, string > > production_rules;
     
 };
 

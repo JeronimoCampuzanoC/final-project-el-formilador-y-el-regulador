@@ -1,4 +1,7 @@
 Problemas encontrados y Solucion del problema
 Uno de los principales problemas fue hacer el parsing del archivo input para poder leerlo y meter las reglas de produccion
 tuvimos demasiados problemas con este ya que no conociamos muy bien la lectura de lachivo de c++
+Luego tuvimos que reformular la forma en la que procesabamos las parejas del archivo ya que lo teniamos de la siguiente manera en una parejas
+<no terminal, {producciones}> lo que a nivel del algorimo nos complicaba bastante por lo que decidimos generar las parejas de la esta manera
+<no terminal, produccion1>, <no terminal, produccion2>
 
