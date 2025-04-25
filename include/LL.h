@@ -10,7 +10,7 @@ using namespace std;
 
 class LL {
 public:
-    LL(Grammar grammar);
+    LL(const Grammar& grammar);
     void makeTable();
     void first();
     void follow();

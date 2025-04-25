@@ -14,11 +14,12 @@ public:
     Grammar(vector< pair<string, string> > rules);
     void setRules(vector< pair<string, string> >);
     vector< pair<string, string> > getRules();
+    vector<string> getNoTerminals();
     void printRules();
 
 private:
     vector< pair<string, string > > production_rules;
-    
+    vector<string> noTerminals;
 };
 
 #endif // GRAMMAR_H

@@ -4,8 +4,7 @@
 #include <string>
 using namespace std;
 
-LL::LL(Grammar grammar) {
-    this->grammar = grammar;
+LL::LL(const Grammar& grammar1) : grammar(grammar1) {
 }
 
 void LL::makeTable() {

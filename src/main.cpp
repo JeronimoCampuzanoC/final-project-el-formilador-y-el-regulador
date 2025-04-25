@@ -34,7 +34,7 @@ int main() {
     // Step 3 Validate strings
 
 
-
+    cout << "Enter a string to validate: ";
 
     return 0;
 }

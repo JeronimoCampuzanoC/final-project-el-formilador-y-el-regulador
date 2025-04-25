@@ -7,6 +7,19 @@ using namespace std;
 
 Grammar::Grammar(vector< pair<string, string> > rules) {
     production_rules = rules;
+    for (int i = 0; i < rules.size(); i++){
+        bool found = false;
+        for (int j = 0; j < noTerminals.size(); j++){
+            if (noTerminals[j] == rules[i].first){
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            noTerminals.push_back(rules[i].first);
+        }
+        found = false;
+    }
 }
 
 void Grammar::setRules(vector< pair<string, string > > rules) {
@@ -15,6 +28,10 @@ void Grammar::setRules(vector< pair<string, string > > rules) {
 
 vector< pair<string, string> > Grammar::getRules() {
     return production_rules;
+}
+
+vector<string> Grammar::getNoTerminals() {
+    return noTerminals;
 }
 
 void Grammar::printRules() {
