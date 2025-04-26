@@ -121,7 +121,7 @@ void LL::follow() {
                                 else if ((k + 2) == production.size()){
                                     vector <string> secondComp;
                                     for (const auto& p : followSet) {
-                                        if (p.first == grammar.getRules()[j].first) {
+                                        if (p.first == grammar.getRules()[j].first && !(p.first == noTerminal)) {
                                             secondComp = p.second;
                                             break;
                                         }
@@ -137,7 +137,7 @@ void LL::follow() {
                     else if ((k + 1) == production.size()){
                         vector <string> secondComp;
                         for (const auto& p : followSet) {
-                            if (p.first == grammar.getRules()[j].first) {
+                            if (p.first == grammar.getRules()[j].first && !(p.first == noTerminal)) {
                                 secondComp = p.second;
                                 break;
                             }
@@ -152,7 +152,21 @@ void LL::follow() {
             // If followset is not empty, add it to the followSet vector
             if (individualFollowSet.size() > 0)                
             {
-                followSet.push_back(make_pair(noTerminal, individualFollowSet));
+                bool found = false;
+                //search noTerminal in followSet
+                for (int e = 0; e < followSet.size(); e++) {
+                    if (followSet[e].first == noTerminal) {
+                        for (int a = 0; a < individualFollowSet.size(); a++)
+                        {
+                            followSet[e].second.push_back(individualFollowSet[a]);
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if(found == false) {
+                    followSet.push_back(make_pair(noTerminal, individualFollowSet));
+                }
             }
             
 

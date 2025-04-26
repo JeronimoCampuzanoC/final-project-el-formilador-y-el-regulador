@@ -2,5 +2,3 @@
 S -> AB
 A -> aA d
 B -> bBc e
-
-b, $,
