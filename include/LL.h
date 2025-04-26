@@ -20,6 +20,9 @@ public:
 private:
     map<int, string> terminals;
     map<int, string> noTerminals;
+    vector< pair<string, vector < string> > > firstSet;
+    vector< pair<string, vector < string> > > followSet;
+
     vector < vector <string> > LLTable;
     Grammar grammar;
 };

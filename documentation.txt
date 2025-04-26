@@ -5,3 +5,7 @@ Luego tuvimos que reformular la forma en la que procesabamos las parejas del arc
 <no terminal, {producciones}> lo que a nivel del algorimo nos complicaba bastante por lo que decidimos generar las parejas de la esta manera
 <no terminal, produccion1>, <no terminal, produccion2>
 
+
+-Debugging complicado porque el cmake
+
+

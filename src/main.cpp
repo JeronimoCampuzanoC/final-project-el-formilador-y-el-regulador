@@ -2,6 +2,7 @@
 using namespace std;
 #include "Reader.h"
 #include "Grammar.h"
+#include "LL.h"
 #include <string>
 
 
@@ -11,7 +12,10 @@ int main() {
     Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
     grammar.printRules();
 
-
+    // Step 1.1 Proccess rules to determine if it is LL or SLR
+    LL ll(grammar);
+    ll.first();
+    ll.follow();
 
 
     // Step 2 Proccess rules to determine if it is LL or SLR

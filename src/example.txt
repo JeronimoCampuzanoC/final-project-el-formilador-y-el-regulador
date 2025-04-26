@@ -1,3 +1,6 @@
-2
-S -> As L
-L -> De J
+3
+S -> AB
+A -> aA d
+B -> bBc e
+
+b, $,
