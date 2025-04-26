@@ -12,4 +12,5 @@ include_directories(include)
 file(GLOB SOURCES "src/*.cpp")
 
 # Ejecutable
-add_executable(FinalProject ${SOURCES})
+add_executable(final-project-el-formilador-y-el-regulador ${SOURCES})
+

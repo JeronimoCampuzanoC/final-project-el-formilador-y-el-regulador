@@ -7,18 +7,41 @@ using namespace std;
 
 Grammar::Grammar(vector< pair<string, string> > rules) {
     production_rules = rules;
+    bool foundTerminal = false;
+
     for (int i = 0; i < rules.size(); i++){
-        bool found = false;
+        bool foundNoTerminal = false;
         for (int j = 0; j < noTerminals.size(); j++){
             if (noTerminals[j] == rules[i].first){
-                found = true;
+                foundNoTerminal = true;
                 break;
             }
         }
-        if (!found){
+        if (!foundNoTerminal){
             noTerminals.push_back(rules[i].first);
         }
-        found = false;
+        foundNoTerminal = false;
+
+        for (int l = 0; l < rules[i].second.size(); l++) {
+            char currentChar = rules[i].second[l];
+        
+            // Only enters in the for-loop if the character is terminal
+            if (islower(currentChar) && currentChar != 'e') {
+                string currentCharStr(1, currentChar);
+                bool foundTerminal = false;
+        
+                for (int k = 0; k < terminals.size(); k++) {
+                    if (terminals[k] == currentCharStr) {
+                        foundTerminal = true;
+                        break;
+                    }
+                }
+        
+                if (!foundTerminal) {
+                    terminals.push_back(currentCharStr);
+                }
+            }
+        }
     }
 }
 
@@ -30,12 +53,15 @@ vector< pair<string, string> > Grammar::getRules() {
     return production_rules;
 }
 
+vector<string> Grammar::getTerminals() {
+    return terminals;
+}
+
 vector<string> Grammar::getNoTerminals() {
     return noTerminals;
 }
 
 void Grammar::printRules() {
-    cout << production_rules.size() << endl;
     for (int i = 0; i < production_rules.size(); i++){
         cout << production_rules[i].first << " -> " << production_rules[i].second << endl;
     }

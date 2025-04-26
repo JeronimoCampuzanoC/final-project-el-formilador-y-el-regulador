@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 LL::LL(const Grammar& grammar1) : grammar(grammar1) {

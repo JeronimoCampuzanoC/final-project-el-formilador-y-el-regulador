@@ -1,15 +1,16 @@
-#include <iostream>
-using namespace std;
+#include <iostream> 
 #include "Reader.h"
 #include "Grammar.h"
 #include "LL.h"
 #include <string>
 
+using namespace std;
+
 
 int main() {
     // Step 1 Proccess rules in a txt file
     Reader reader;
-    Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
+    Grammar grammar = reader.readFile("/Users/andresperezquinchia/Universidad/assignment2-el-formilador-y-el-regulador/final-project-el-formilador-y-el-regulador/src/example.txt");
     grammar.printRules();
 
     // Step 1.1 Proccess rules to determine if it is LL or SLR
@@ -38,7 +39,7 @@ int main() {
     // Step 3 Validate strings
 
 
-    cout << "Enter a string to validate: ";
+    //cout << "Enter a string to validate: ";
 
     return 0;
 }
