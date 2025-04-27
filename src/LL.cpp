@@ -182,9 +182,129 @@ void LL::follow() {
 }
 
 
-void LL::makeTable() {
+/*
+    a   b   c   d   $
+S  []  []  []  []  []
+A  []  []  []  []  []
+B  []  []  []  []  []
+*/
+
+void LL::makeTable()
+{
+    // Map non-terminals to row indexes
+    int index = 0;
+    for (auto nonTerminal : grammar.getNoTerminals())
+    {
+        noTerminals.insert({nonTerminal, index});
+        index++;
+    }
+
+    // Map terminals to column indexes
+    index = 0;
+    for (auto terminal : grammar.getTerminals())
+    {
+        terminals.insert({terminal, index});
+        index++;
+    }
+
+    // Add the end-of-input symbol "$" to the terminals
+    terminals.insert({"$", index++});
+
+    // Resize the LLTable to match the number of non-terminals and terminals
+    LLTable.resize(noTerminals.size(), vector<string>(terminals.size(), ""));
+
     
+    // Iterate over Non-terminals
+    for (int i = 0; i < noTerminals.size(); i++)
+    {
+        string nonTerminal = grammar.getNoTerminals()[i];
+
+        // Get the first set of the current non-terminal
+        vector<string> firstSetOfNonTerminal;
+        for (const auto& p : firstSet)
+        {
+            if (p.first == nonTerminal)
+            {
+                firstSetOfNonTerminal = p.second;
+                break;
+            }
+        }
+
+        // Search the number of productions of the current non-terminal 
+        int numProductions = 0;
+        for (int j = 0; j < grammar.getRules().size(); j++)
+        {
+            if (grammar.getRules()[j].first == nonTerminal)
+            {
+                numProductions++;
+            }
+        }
+        
+        for (int j = 0; j < grammar.getRules().size(); j++)
+        {
+            // Check if the rule's left side matches the current non-terminal
+            if (grammar.getRules()[j].first == nonTerminal)
+            {
+                if (numProductions == 1)
+                {
+                    // iterate over the first set of the current non-terminal (we assume that if a production has epsilon, it have more than one production)
+                    for (int k = 0; k < firstSetOfNonTerminal.size(); k++)
+                    {
+                        LLTable[noTerminals[nonTerminal]][terminals[firstSetOfNonTerminal[k]]] = grammar.getRules()[j].second;
+                    }
+                        
+                }
+                // If there is more than one prodution
+                else{
+                    for (int k = 0; k < numProductions; k++)
+                    {
+
+                        if (firstSetOfNonTerminal[k] == "e")
+                        {
+                            // If the first set contains epsilon, add the follow set to the table
+                            vector<string> followSetOfNonTerminal;
+                            for (const auto& p : followSet)
+                            {
+                                if (p.first == nonTerminal)
+                                {
+                                    followSetOfNonTerminal = p.second;
+                                    break;
+                                }
+                            }
+                            // Search epsilon rule
+                            
+
+                            // Iterate over the follow set and add it to the LLTable
+                            for (int l = 0; l < followSetOfNonTerminal.size(); l++)
+                            {
+                                LLTable[noTerminals[nonTerminal]][terminals[followSetOfNonTerminal[l]]] = "e";
+                            }
+                        }
+                        // If the first set does not contain epsilon, add it to the LLTable with the next logic
+                        else{
+
+                            LLTable[noTerminals[nonTerminal]][terminals[firstSetOfNonTerminal[k]]] = grammar.getRules()[j].second;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
+void LL::printTable()
+{
+    // Print column headers
+    cout << "\t";
+    for (const auto &terminal : terminals)
+    {
+        cout << terminal.second << "\t";
+    }
+    cout << endl;
+
+    // Then print the table
+}
+
 
 void LL::checkString(string str) {
     

@@ -12,14 +12,15 @@ class LL {
 public:
     LL(const Grammar& grammar);
     void makeTable();
+    void printTable();
     void first();
     void follow();
     void checkString(string str);
     
 
 private:
-    map<int, string> terminals;
-    map<int, string> noTerminals;
+    map<string, int> terminals;
+    map<string, int> noTerminals;
     vector< pair<string, vector < string> > > firstSet;
     vector< pair<string, vector < string> > > followSet;
 
