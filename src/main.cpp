@@ -18,6 +18,10 @@ int main() {
     ll.first();
     ll.follow();
     ll.makeTable();
+    ll.printTable();
+    ll.checkString("adbc");
+    ll.checkString("aabbcc");
+    ll.checkString("aabcc");
 
 
     // Step 2 Proccess rules to determine if it is LL or SLR

@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <string>
-
+#include <iomanip>
+#include <stack>
 using namespace std;
 
 LL::LL(const Grammar& grammar1) : grammar(grammar1) {
@@ -305,17 +306,80 @@ void LL::makeTable()
 void LL::printTable()
 {
     // Print column headers
-    cout << "\t";
-    for (const auto &terminal : terminals)
-    {
-        cout << terminal.second << "\t";
+    cout << setw(4) << " ";
+    
+    for (int j = 0; j < terminals.size(); j++) {
+        
+        if (j == grammar.getTerminals().size()) 
+        {
+            cout << setw(4) << "$";
+            break;
+        }
+        else
+        {
+            cout << setw(4) << grammar.getTerminals()[j];
+        }
     }
     cout << endl;
 
-    // Then print the table
+    for (int i = 0; i < noTerminals.size(); i++) {
+        // Print row header
+        cout << setw(4) << grammar.getNoTerminals()[i];
+
+        for (int j = 0; j < terminals.size(); j++) {
+            cout << setw(4) << LLTable[i][j];
+        }
+        cout << endl;
+    }
 }
 
 
 void LL::checkString(string str) {
-    
+    stack<string> stack;
+    stack.push("$");
+    stack.push("S");
+    string currentStackElement;
+    string currentStringElement;
+    string ruleApplied;
+    bool success = true;
+    for (int i = 0; i < str.size(); i++)
+    {
+        currentStringElement = string(1, str[i]);
+        do
+        {
+            currentStackElement = stack.top();
+            if (islower(currentStackElement[0]) || currentStackElement == "$")
+            {
+                break;
+            }
+            else{
+                ruleApplied = LLTable[noTerminals[currentStackElement]][terminals[currentStringElement]];
+                stack.pop();
+                if (ruleApplied == "")
+                {
+                    success = false;
+                    i = str.size();
+                    break;
+                }
+                
+                for (int j = ruleApplied.size()-1; j >= 0; j--)
+                {
+                    if (ruleApplied[j] != 'e')
+                    {
+                        stack.push(string(1, ruleApplied[j])); 
+                    }
+                }
+
+            }
+        } while (true && success);
+        stack.pop();
+    }
+    if (success)
+    {
+        cout << "The string is valid" << endl;
+    }
+    else
+    {
+        cout << "The string is not valid" << endl;
+    }
 }
