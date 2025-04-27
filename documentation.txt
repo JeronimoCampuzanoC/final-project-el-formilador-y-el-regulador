@@ -9,5 +9,9 @@ Luego tuvimos que reformular la forma en la que procesabamos las parejas del arc
 -Debugging complicado porque el cmake
 
 -Cuando el conjunto de first presenta mas de un elemento y hay mas de 1 posible prodccion para el no terminal ejemplo S -> A | D     el first de S es {a,d}, se complica ya que hay asignar una diferente para cada una
+lo mismo cuando en el firstset tenemos epsilon
+
+
+
 
 

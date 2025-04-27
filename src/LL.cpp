@@ -239,57 +239,67 @@ void LL::makeTable()
                 numProductions++;
             }
         }
-        
-        for (int j = 0; j < grammar.getRules().size(); j++)
+
+
+
+
+
+
+
+        if (numProductions == 1)
         {
-            // Check if the rule's left side matches the current non-terminal
-            if (grammar.getRules()[j].first == nonTerminal)
+            for (int j = 0; j < grammar.getRules().size(); j++)
             {
-                if (numProductions == 1)
+                // Check if the rule's left side matches the current non-terminal
+                if (grammar.getRules()[j].first == nonTerminal)
                 {
-                    // iterate over the first set of the current non-terminal (we assume that if a production has epsilon, it have more than one production)
                     for (int k = 0; k < firstSetOfNonTerminal.size(); k++)
                     {
                         LLTable[noTerminals[nonTerminal]][terminals[firstSetOfNonTerminal[k]]] = grammar.getRules()[j].second;
                     }
-                        
                 }
-                // If there is more than one prodution
-                else{
-                    for (int k = 0; k < numProductions; k++)
+            }
+            // iterate over the first set of the current non-terminal (we assume that if a production has epsilon, it have more than one production)
+            
+                
+        }
+        // If there is more than one prodution
+        else{
+            int elementOfSet = 0;   
+
+            for (int j = 0; j < grammar.getRules().size(); j++)
+            {
+                if (firstSetOfNonTerminal[elementOfSet] == "e" && grammar.getRules()[j].first == nonTerminal)
+                {
+                    // If the first set contains epsilon, add the follow set to the table
+                    vector<string> followSetOfNonTerminal;
+                    for (const auto& p : followSet)
                     {
-
-                        if (firstSetOfNonTerminal[k] == "e")
+                        if (p.first == nonTerminal)
                         {
-                            // If the first set contains epsilon, add the follow set to the table
-                            vector<string> followSetOfNonTerminal;
-                            for (const auto& p : followSet)
-                            {
-                                if (p.first == nonTerminal)
-                                {
-                                    followSetOfNonTerminal = p.second;
-                                    break;
-                                }
-                            }
-                            // Search epsilon rule
-                            
-
-                            // Iterate over the follow set and add it to the LLTable
-                            for (int l = 0; l < followSetOfNonTerminal.size(); l++)
-                            {
-                                LLTable[noTerminals[nonTerminal]][terminals[followSetOfNonTerminal[l]]] = "e";
-                            }
-                        }
-                        // If the first set does not contain epsilon, add it to the LLTable with the next logic
-                        else{
-
-                            LLTable[noTerminals[nonTerminal]][terminals[firstSetOfNonTerminal[k]]] = grammar.getRules()[j].second;
+                            followSetOfNonTerminal = p.second;
+                            break;
                         }
                     }
+                    // Search epsilon rule
+                    
+
+                    // Iterate over the follow set and add it to the LLTable
+                    for (int l = 0; l < followSetOfNonTerminal.size(); l++)
+                    {
+                        LLTable[noTerminals[nonTerminal]][terminals[followSetOfNonTerminal[l]]] = "e";
+                    }
+                }
+                // Check if the rule's left side matches the current non-terminal
+                else if (grammar.getRules()[j].first == nonTerminal)
+                {
+                    LLTable[noTerminals[nonTerminal]][terminals[firstSetOfNonTerminal[elementOfSet]]] = grammar.getRules()[j].second;
+                    elementOfSet++;
                 }
             }
         }
     }
+    cout << "LLTable" << endl;
 }
 
 void LL::printTable()

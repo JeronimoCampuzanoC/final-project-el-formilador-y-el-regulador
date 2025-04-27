@@ -17,6 +17,7 @@ int main() {
     LL ll(grammar);
     ll.first();
     ll.follow();
+    ll.makeTable();
 
 
     // Step 2 Proccess rules to determine if it is LL or SLR
