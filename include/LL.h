@@ -16,7 +16,7 @@ public:
     void first();
     void follow();
     void checkString(string str);
-    
+    bool isLL1();
 
 private:
     map<string, int> terminals;

@@ -10,8 +10,7 @@ using namespace std;
 int main() {
     // Step 1 Proccess rules in a txt file
     Reader reader;
-    Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
-    grammar.printRules();
+    Grammar grammar = reader.readFile("/Users/andresperezquinchia/Universidad/assignment2-el-formilador-y-el-regulador/final-project-el-formilador-y-el-regulador/src/example.txt");
 
     // Step 1.1 Proccess rules to determine if it is LL or SLR
     LL ll(grammar);
@@ -22,6 +21,14 @@ int main() {
     ll.checkString("adbc");
     ll.checkString("aabbcc");
     ll.checkString("aabcc");
+    
+    
+    if(ll.isLL1()) {
+        cout << "The grammar is LL(1)" << endl;
+    } else {
+        cout << "The grammar is not LL(1)" << endl;
+    }
+    
 
 
     // Step 2 Proccess rules to determine if it is LL or SLR

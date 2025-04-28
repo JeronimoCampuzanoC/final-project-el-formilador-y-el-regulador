@@ -378,3 +378,21 @@ void LL::checkString(string str) {
         cout << "The string is not valid" << endl;
     }
 }
+
+bool LL::isLL1() {
+    for (int i = 0; i < LLTable.size(); i++) {
+        for (int j = 0; j < LLTable[i].size(); j++) {
+            // It's not an LL(1) grammar if more than one production in the same cell
+            if (LLTable[i][j] != "") {
+                // To catch this, we check if there are multiple productions separated by a slash (/)
+                if (LLTable[i][j].find('/') != string::npos) {
+                    cout << "Conflict detected at cell (" 
+                         << i << ", " << j << "): " 
+                         << LLTable[i][j] << endl;
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
