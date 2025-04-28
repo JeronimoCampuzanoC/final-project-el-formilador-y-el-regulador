@@ -242,11 +242,6 @@ void LL::makeTable()
         }
 
 
-
-
-
-
-
         if (numProductions == 1)
         {
             for (int j = 0; j < grammar.getRules().size(); j++)
