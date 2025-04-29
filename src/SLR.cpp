@@ -30,10 +30,10 @@ void SLR::augmentedGrammar()
 }
 
 // Create States closure and goto implementation
-void SLR::createStates(int name, vector<pair<string, string>> input)
+void SLR::createStates(vector<pair<string, string>> input)
 {
 
-    State newState(name);
+    State newState(states.size());
 
     newState.addProduction(input);
 
@@ -73,55 +73,57 @@ void SLR::createStates(int name, vector<pair<string, string>> input)
         }
     }
     // If it doesn't exist, add it to the states vector
-    if (!exists)
+    if (!exists && !newState.getProductions().empty())
     {
         states.push_back(newState);
 
-        for (int i = 0; i < newState.getProductions().size(); i++) {
+        for (int i = 0; i < newState.getProductions().size(); i++)
+        {
             vector<pair<string, string>> prodToCheck = {newState.getProductions()[i]};
             size_t dotPos = prodToCheck[0].second.find('.');
             string result;
-            if (dotPos != string::npos && dotPos + 1 < prodToCheck[0].second.size() && dotPos != prodToCheck[0].second.size() - 1) {
+            if (dotPos != string::npos && dotPos + 1 < prodToCheck[0].second.size() && dotPos != prodToCheck[0].second.size() - 1)
+            {
                 result = prodToCheck[0].second;
                 swap(result[dotPos], result[dotPos + 1]);
             }
             prodToCheck[0].second = result;
-            createStates(name + 1, prodToCheck);
+            createStates(prodToCheck);
         }
     }
 }
 
-    vector<pair<string, string>> SLR::getAugmentedGrammar()
-    {
-        return augmented_grammar;
-    }
+vector<pair<string, string>> SLR::getAugmentedGrammar()
+{
+    return augmented_grammar;
+}
 
-    // Make Table
-    void SLR::makeTable()
-    {
-        // Implementation of table creation
-    }
+// Make Table
+void SLR::makeTable()
+{
+    // Implementation of table creation
+}
 
-    // Print Table
-    void SLR::printTable()
-    {
-        // Implementation of table printing
-    }
+// Print Table
+void SLR::printTable()
+{
+    // Implementation of table printing
+}
 
-    // First Set
-    void SLR::first()
-    {
-        // Implementation of first set calculation
-    }
+// First Set
+void SLR::first()
+{
+    // Implementation of first set calculation
+}
 
-    // Follow Set
-    void SLR::follow()
-    {
-        // Implementation of follow set calculation
-    }
+// Follow Set
+void SLR::follow()
+{
+    // Implementation of follow set calculation
+}
 
-    // Check String
-    void SLR::checkString(string str)
-    {
-        // Implementation of string checking
-    }
+// Check String
+void SLR::checkString(string str)
+{
+    // Implementation of string checking
+}

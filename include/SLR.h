@@ -9,11 +9,12 @@
 
 using namespace std;
 
-class SLR {
+class SLR
+{
 public:
-    SLR(const Grammar& grammar);
+    SLR(const Grammar &grammar);
     void augmentedGrammar();
-    void createStates(int name, vector<pair<string, string>> productions);
+    void createStates(vector<pair<string, string>> productions);
     void makeTable();
     void printTable();
     void first();
@@ -21,7 +22,6 @@ public:
     void checkString(string str);
 
     vector<pair<string, string>> getAugmentedGrammar();
-    
 
 private:
     map<string, int> terminals;
@@ -33,7 +33,5 @@ private:
     vector<vector<string>> LLTable;
     Grammar grammar;
 };
-
-
 
 #endif

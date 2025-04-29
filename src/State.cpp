@@ -21,7 +21,9 @@ void State::addProduction(vector< pair <string, string> >production) {
         }
         // If it doesn't exist, add it to the productions vector
         if (!exists) {
-            productions.push_back(prod);
+            if (prod.second != "") {
+                productions.push_back(prod);
+            }
         }
     }
 }
