@@ -27,6 +27,7 @@ private:
     map<string, int> terminals;
     map<string, int> noTerminals;
     vector<State> states;
+    vector<pair<string, vector<string>>> firstSet;
     vector<pair<string, vector<string>>> followSet;
     vector<pair<string, string>> augmented_grammar;
 
