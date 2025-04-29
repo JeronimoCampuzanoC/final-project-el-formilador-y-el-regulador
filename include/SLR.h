@@ -32,7 +32,7 @@ private:
     vector<pair<string, string>> augmented_grammar;
     vector<tuple<int, int, string>> gotoRegistry;
 
-    vector<vector<string>> LLTable;
+    vector<vector<string>> SLRTable;
     Grammar grammar;
 };
 

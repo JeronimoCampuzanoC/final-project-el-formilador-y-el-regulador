@@ -64,11 +64,15 @@ void SLR::createStates(vector<pair<string, string>> input)
     }
     // Check if the new state already exists
     bool exists = false;
-    for (const auto &state : states)
+    for (int i = 0; i < states.size(); i++)
     {
+        State state = states[i];
+        // Check if the productions of the new state are equal to the productions of the existing state
         if (state.getProductions() == newState.getProductions())
         {
             exists = true;
+            int lenght = gotoRegistry.size();
+            get<1>(gotoRegistry[lenght - 1]) = state.getName();
             break;
         }
     }
@@ -92,8 +96,7 @@ void SLR::createStates(vector<pair<string, string>> input)
 
                 createStates(prodToCheck);
             }
-            
-        }
+                }
     }
 }
 
@@ -307,4 +310,9 @@ void SLR::follow()
 void SLR::checkString(string str)
 {
     // Implementation of string checking
+}
+
+void SLR::SLR::printTable()
+{
+    
 }
