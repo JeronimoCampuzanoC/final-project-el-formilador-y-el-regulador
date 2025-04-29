@@ -2,6 +2,7 @@
 #include "Reader.h"
 #include "Grammar.h"
 #include "LL.h"
+#include "SLR.h"
 #include <string>
 
 using namespace std;
@@ -30,6 +31,16 @@ int main() {
     }
     
 
+
+    SLR slr(grammar);
+    slr.augmentedGrammar();
+    slr.createStates(0, vector<pair<string, string>>{make_pair("S'", ".S")});
+    // slr.first();
+    // slr.follow();
+    // slr.makeTable();
+    // slr.printTable();
+    // slr.checkString("adbc");
+    // slr.checkString("aabbcc");
 
     // Step 2 Proccess rules to determine if it is LL or SLR
 

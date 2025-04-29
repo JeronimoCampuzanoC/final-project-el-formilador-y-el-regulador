@@ -14,4 +14,9 @@ lo mismo cuando en el firstset tenemos epsilon
 
 
 
+no hay recursividad S no puede producir -> Sa
+
+no puede haber first con 2 terminales iguales por ejemplo S -> aA aB  no se pu
+
+
 
