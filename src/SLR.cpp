@@ -86,12 +86,13 @@ void SLR::createStates(vector<pair<string, string>> input)
             {
                 result = prodToCheck[0].second;
                 swap(result[dotPos], result[dotPos + 1]);
+                prodToCheck[0].second = result;
+
+                gotoRegistry.push_back(make_tuple(newState.getName(), states.size(), string(1, prodToCheck[0].second[dotPos])));
+
+                createStates(prodToCheck);
             }
-            prodToCheck[0].second = result;
-
-            gotoRegistry.push_back(make_tuple(newState.getName(), states.size(), string(1, prodToCheck[0].second[dotPos])));
-
-            createStates(prodToCheck);
+            
         }
     }
 }
