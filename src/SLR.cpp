@@ -76,43 +76,18 @@ void SLR::createStates(int name, vector<pair<string, string>> input)
     if (!exists)
     {
         states.push_back(newState);
-        map<string, vector<pair<string, string>>> newStateMap;
-        for (int i = 0; i < newState.getProductions().size(); i++)
-        {
-            // Check what symbol is after the dot
-            string production = newState.getProductions()[i].second;
-            size_t dotPos = production.find('.');
-            if (dotPos != string::npos && dotPos + 1 < production.size())
-            {
-                string nextSymbol = production.substr(dotPos + 1, 1);
-                newStateMap[nextSymbol].push_back(newState.getProductions()[i]);
-            }
-            //move the dot to the right of every production of newStateMap
-            for (auto &pair : newStateMap)
-            {
-                string production = pair.second[0].second;
-                size_t dotPos = production.find('.');
-                if (dotPos != string::npos && dotPos + 1 < production.size())
-                {
-                    string nextSymbol = production.substr(dotPos + 1, 1);
-                    pair.second[0].second = production.substr(0, dotPos + 1) + nextSymbol + ".";
-                }
-            }
-            
-            
-            
-        }
-        // apply createStates to the newStateMap
-        for (const auto &pair1 : newStateMap)
-        {
-            
-            vector<pair<string, string>> productions1 = pair1.second;
-            createStates(name + 1, productions1);
-        }
 
-        name++;
-
-        states.push_back(newState);
+        for (int i = 0; i < newState.getProductions().size(); i++) {
+            vector<pair<string, string>> prodToCheck = {newState.getProductions()[i]};
+            size_t dotPos = prodToCheck[0].second.find('.');
+            string result;
+            if (dotPos != string::npos && dotPos + 1 < prodToCheck[0].second.size() && dotPos != prodToCheck[0].second.size() - 1) {
+                result = prodToCheck[0].second;
+                swap(result[dotPos], result[dotPos + 1]);
+            }
+            prodToCheck[0].second = result;
+            createStates(name + 1, prodToCheck);
+        }
     }
 }
 
