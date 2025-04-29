@@ -30,3 +30,7 @@ void State::addProduction(vector< pair <string, string> >production) {
 const vector<pair <string, string>>& State::getProductions() const {
     return productions;
 }
+
+int State::getName() {
+    return name;
+}

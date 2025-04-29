@@ -30,6 +30,7 @@ private:
     vector<pair<string, vector<string>>> firstSet;
     vector<pair<string, vector<string>>> followSet;
     vector<pair<string, string>> augmented_grammar;
+    vector<tuple<int, int, string>> gotoRegistry;
 
     vector<vector<string>> LLTable;
     Grammar grammar;

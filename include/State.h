@@ -13,6 +13,7 @@ public:
     State(const int& name);
     void addProduction(vector< pair <string, string> > production);
     const vector< pair <string, string> >& getProductions() const;
+    int getName();
 
 private:
     int name;
