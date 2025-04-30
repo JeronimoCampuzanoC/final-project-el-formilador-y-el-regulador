@@ -81,22 +81,55 @@ void SLR::createStates(vector<pair<string, string>> input)
     {
         states.push_back(newState);
 
+        vector<pair<string, vector<pair<string, string>>>> groups;
+
         for (int i = 0; i < newState.getProductions().size(); i++)
         {
-            vector<pair<string, string>> prodToCheck = {newState.getProductions()[i]};
-            size_t dotPos = prodToCheck[0].second.find('.');
+            pair<string, string> prodToCheck = newState.getProductions()[i]; //******* */
+            size_t dotPos = prodToCheck.second.find('.');
             string result;
-            if (dotPos != string::npos && dotPos + 1 < prodToCheck[0].second.size() && dotPos != prodToCheck[0].second.size() - 1)
+            if (dotPos != string::npos && dotPos + 1 < prodToCheck.second.size() && dotPos != prodToCheck.second.size() - 1)
             {
-                result = prodToCheck[0].second;
-                swap(result[dotPos], result[dotPos + 1]);
-                prodToCheck[0].second = result;
-
-                gotoRegistry.push_back(make_tuple(newState.getName(), states.size(), string(1, prodToCheck[0].second[dotPos])));
-
-                createStates(prodToCheck);
-            }
+                string x1 = prodToCheck.second.substr(dotPos + 1, 1);
+                // Search for x1 in groups
+                for (auto &group : groups)
+                {
+                    if (group.first == x1)
+                    {
+                        // x1 already exists, push_back into the inner vector
+                        group.second.push_back({newState.getProductions()[i]});
+                        return;
+                    }
                 }
+
+                // x1 not found, create new group
+                groups.push_back({x1, {{newState.getProductions()[i]}}});
+            }
+        }
+        for (int j = 0; j < groups.size(); j++)
+        {
+            for (int k = 0; k < groups[j].second.size(); k++)
+            {
+                // Reference to x3 for direct modification
+                string &x3 = groups[j].second[k].second;
+
+                // Find the position of the dot
+                size_t dotPos = x3.find('.');
+
+                // Only swap if '.' is found and there's a next character
+                if (dotPos != string::npos && dotPos + 1 < x3.size())
+                {
+                    swap(x3[dotPos], x3[dotPos + 1]);
+                }
+            }
+        }
+
+        for (int h = 0; h < groups.size(); h++)
+        {
+            gotoRegistry.push_back(make_tuple(newState.getName(), states.size(), groups[h].first));
+
+            createStates(groups[h].second);
+        }
     }
 }
 
@@ -108,7 +141,23 @@ vector<pair<string, string>> SLR::getAugmentedGrammar()
 // Make Table
 void SLR::makeTable()
 {
-    // Implementation of table creation
+    int index = 0;
+    for (auto nonTerminal : grammar.getNoTerminals())
+    {
+        noTerminals.insert({nonTerminal, index});
+        index++;
+    }
+
+    noTerminals.insert({"$", index});
+    index++;
+
+    for (auto terminal : grammar.getTerminals())
+    {
+        terminals.insert({terminal, index});
+        index++;
+    }
+
+    SLRTable.resize(noTerminals.size() + terminals.size(), vector<string>(states.size(), ""));
 }
 
 // Print Table
@@ -310,9 +359,4 @@ void SLR::follow()
 void SLR::checkString(string str)
 {
     // Implementation of string checking
-}
-
-void SLR::SLR::printTable()
-{
-    
 }

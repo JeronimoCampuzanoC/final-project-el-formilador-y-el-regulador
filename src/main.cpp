@@ -11,7 +11,7 @@ int main()
 {
     // Step 1 Proccess rules in a txt file
     Reader reader;
-    Grammar grammar = reader.readFile("/Users/andresperezquinchia/Universidad/assignment2-el-formilador-y-el-regulador/final-project-el-formilador-y-el-regulador/src/example.txt");
+    Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
 
     // Step 1.1 Proccess rules to determine if it is LL or SLR
     LL ll(grammar);
