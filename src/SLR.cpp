@@ -208,6 +208,7 @@ bool SLR::makeTable()
                     }
                     else
                     {
+                        
                         pair<string, string> productionToReduce = states[i].getProductions()[j];
                         // clear the dot from the production
                         productionToReduce.second = production.substr(0, dotPos);

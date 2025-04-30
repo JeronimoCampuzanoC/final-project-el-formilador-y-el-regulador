@@ -109,6 +109,44 @@ int main()
 
         } while (in != 'Q');
     }
+    else if (isLL)
+    {
+        // Only LL(1)
+        cout << "Grammar is LL(1)." << endl;
+        ll.printTable();
+
+        string input;
+
+        // ask for a string to check until the user enters an empty string
+        do
+        {
+            cout << "Enter a string to check: ";
+            getline(cin, input);
+            if (!input.empty())
+            {
+                ll.checkString(input);
+            }
+        } while (!input.empty());
+    }
+    else if (isSLR)
+    {
+        // Only SLR(1)
+        cout << "Grammar is SLR(1)." << endl;
+        slr.printTable();
+
+        string input;
+
+        // ask for a string to check until the user enters an empty string
+        do
+        {
+            cout << "Enter a string to check: ";
+            getline(cin, input);
+            if (!input.empty())
+            {
+                slr.checkString(input);
+            }
+        } while (!input.empty());
+    }
     else
     {
         cout << "Grammar is neither LL(1) nor SLR(1)." << endl;
