@@ -40,7 +40,8 @@ int main()
     slr.makeTable();
     slr.printTable();
     slr.checkString("zbzaz");
-    slr.checkString("");
+    slr.checkString("zaz");
+    slr.checkString("zzzzz");
 
     // Step 2 Check if the grammar is SLR
 

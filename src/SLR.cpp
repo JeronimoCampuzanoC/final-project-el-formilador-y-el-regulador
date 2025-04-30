@@ -524,5 +524,90 @@ void SLR::follow()
 // Check String
 void SLR::checkString(string str)
 {
-    // Implementation of string checking
+    // Read the string
+
+    string input = str;
+    input += "$";
+    stack<string> stack;
+    stack.push("0");
+    int index = 0;
+    string action = "";
+    string state = "";
+    string top_stack = stack.top();
+    string head_input = input.substr(index, 1);
+
+    // Check if the string is empty
+    if (input == "$")
+    {
+        cout << "The string is empty" << endl;
+        return;
+    }
+
+    while (true)
+    {
+        top_stack = stack.top();
+        head_input = input.substr(index, 1);
+
+        // Get the action from the SLR table
+        if (terminals.find(head_input) != terminals.end())
+        {
+            action = SLRTable[stoi(top_stack)][terminals[head_input]];
+        }
+        else
+        {
+            cout << "Invalid input symbol: " << head_input << endl;
+            return;
+        }
+
+        if (action.empty())
+        {
+            cout << "The string is rejected" << endl;
+            return;
+        }
+
+        if (action[0] == 's') // Shift
+        {
+            string next_state = action.substr(1);
+            stack.push(head_input);
+            stack.push(next_state);
+            index++;
+        }
+        else if (action[0] == 'r') // Reduce
+        {
+            int rule_index = stoi(action.substr(1));
+            auto rule = grammar.getRules()[rule_index];
+            string lhs = rule.first;
+            string rhs = rule.second;
+
+            // Pop 2 * |rhs| elements from the stack
+            for (int i = 0; i < 2 * rhs.size(); i++)
+            {
+                stack.pop();
+            }
+
+            top_stack = stack.top();
+            stack.push(lhs);
+
+            // Push the goto state
+            if (noTerminals.find(lhs) != noTerminals.end())
+            {
+                stack.push(SLRTable[stoi(top_stack)][noTerminals[lhs]]);
+            }
+            else
+            {
+                cout << "Error: Invalid non-terminal in reduction" << endl;
+                return;
+            }
+        }
+        else if (action == "acc") // Accept
+        {
+            cout << "The string is accepted" << endl;
+            return;
+        }
+        else
+        {
+            cout << "The string is rejected" << endl;
+            return;
+        }
+    }
 }

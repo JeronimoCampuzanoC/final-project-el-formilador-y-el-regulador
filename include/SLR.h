@@ -36,7 +36,6 @@ private:
     vector<tuple<int, int, string>> gotoRegistry;
 
     vector<vector<string>> SLRTable;
-    stack<string> stack;
     Grammar grammar;
 };
 
