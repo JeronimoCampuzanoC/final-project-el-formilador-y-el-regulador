@@ -1,4 +1,7 @@
-3
-S -> AB
-A -> aA d
-B -> bBc e
+6
+S -> SaT
+S -> T
+T -> TbF
+T -> F
+F -> cSd
+F -> z

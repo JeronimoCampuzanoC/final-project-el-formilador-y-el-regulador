@@ -92,18 +92,23 @@ void SLR::createStates(vector<pair<string, string>> input)
             {
                 string x1 = prodToCheck.second.substr(dotPos + 1, 1);
                 // Search for x1 in groups
+                bool foundx1 = false;
                 for (auto &group : groups)
                 {
                     if (group.first == x1)
                     {
                         // x1 already exists, push_back into the inner vector
                         group.second.push_back({newState.getProductions()[i]});
-                        return;
+                        foundx1 = true;
                     }
+                    std::cout << "group.first: " << group.first << ", x1: " << x1 << std::endl;
                 }
-
+                if (!foundx1)
+                {
+                    groups.push_back({x1, {{newState.getProductions()[i]}}});
+                }
+                
                 // x1 not found, create new group
-                groups.push_back({x1, {{newState.getProductions()[i]}}});
             }
         }
         for (int j = 0; j < groups.size(); j++)
