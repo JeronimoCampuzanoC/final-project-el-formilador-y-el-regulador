@@ -1,7 +1,3 @@
-6
-S -> SaT
-S -> T
-T -> TbF
-T -> F
-F -> cSd
-F -> z
+2
+S -> A
+A -> A b

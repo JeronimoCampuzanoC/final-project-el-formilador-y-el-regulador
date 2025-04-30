@@ -13,49 +13,44 @@ int main()
     Reader reader;
     Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
 
-    // Step 1.1 Proccess rules to determine if it is LL or SLR
+    
+    
+
+    
     LL ll(grammar);
-    ll.first();
-    ll.follow();
-    ll.makeTable();
-    ll.printTable();
-    ll.checkString("adbc");
-    ll.checkString("aabbcc");
-    ll.checkString("aabcc");
-
-    if (ll.isLL1())
-    {
-        cout << "The grammar is LL(1)" << endl;
-    }
-    else
-    {
-        cout << "The grammar is not LL(1)" << endl;
-    }
-
     SLR slr(grammar);
+    // Step 2 Check if the grammar is SLR
     slr.augmentedGrammar();
     slr.createStates(vector<pair<string, string>>{make_pair("S'", ".S")});
     slr.first();
     slr.follow();
-    slr.makeTable();
-    slr.printTable();
-    slr.checkString("zbzaz");
-    slr.checkString("zaz");
-    slr.checkString("zzzzz");
-
-    // Step 2 Check if the grammar is SLR
-
+    bool isSLR = slr.makeTable();
     // Step 3 Check if the grammar is LL or SLR
-    // if (slr.isSLR1() && ll.isLL1())
-    // {
-    //     cout << "The Grammar is a SLR and LL Type" << endl;
-    // }
-    // else if (slr.isSLR1()) {
-    //     cout << "The Grammar is a SLR Type" << endl;
-    // } else if (ll.isLL1()) {
-    //     cout << "The Grammar is a LL Type" << endl;
-    // } else {
-    //     cout << "The grammar is neither a SLR Type nor a LL type" << endl;
-    // }
+    if (isSLR && ll.isLL1())
+    {
+        cout << "Select a parser (T: for LL(1), B: for SLR(1), Q: quit):" << endl;
+    }
+    else if (isSLR) {
+        cout << "Grammar is SLR(1)." << endl;
+        
+        
+        
+        slr.printTable();
+        slr.checkString("zbzaz");
+        slr.checkString("zaz");
+        slr.checkString("zzzzz");
+    } else if (ll.isLL1()) {
+        cout << "Grammar is LL(1)." << endl;
+        
+        ll.first();
+        ll.follow();
+        ll.makeTable();
+        ll.printTable();
+        ll.checkString("adbc");
+        ll.checkString("aabbcc");
+        ll.checkString("aabcc");
+    } else {
+        cout << "Grammar is neither LL(1) nor SLR(1)." << endl;
+    }
     return 0;
 }

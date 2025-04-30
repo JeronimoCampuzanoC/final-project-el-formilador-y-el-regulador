@@ -16,7 +16,7 @@ public:
     SLR(const Grammar &grammar);
     void augmentedGrammar();
     void createStates(vector<pair<string, string>> productions);
-    void makeTable();
+    bool makeTable();
     void printTable();
     void first();
     void follow();
@@ -24,7 +24,7 @@ public:
 
     vector<pair<string, string>> getAugmentedGrammar();
 
-    bool isSLR1();
+
 
 private:
     map<string, int> terminals;

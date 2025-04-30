@@ -387,19 +387,29 @@ void LL::checkString(string str)
 
 bool LL::isLL1()
 {
-    for (int i = 0; i < LLTable.size(); i++)
+    // Check if the grammar is not left-recursive
+    for (int i = 0; i < grammar.getNoTerminals().size(); i++)
     {
-        for (int j = 0; j < LLTable[i].size(); j++)
+        string noTerminal = grammar.getNoTerminals()[i];
+        for (int j = 0; j < grammar.getRules().size(); j++)
         {
-            // It's not an LL(1) grammar if more than one production in the same cell
-            if (LLTable[i][j] != "")
+            if (grammar.getRules()[j].first == noTerminal && grammar.getRules()[j].second[0] == noTerminal[0])
             {
-                // To catch this, we check if there are multiple productions separated by a slash (/)
-                if (LLTable[i][j].find('/') != string::npos)
+                cout << "Left recursion detected in the grammar." << endl;
+                return false;
+            }
+        }
+    }
+    // Check if the grammar is not ambiguous, so check if there are more duplicates in the first set
+    for (int i = 0; i < firstSet.size(); i++)
+    {
+        for (int j = 0; j < firstSet[i].second.size(); j++)
+        {
+            for (int k = j + 1; k < firstSet[i].second.size(); k++)
+            {
+                if (firstSet[i].second[j] == firstSet[i].second[k])
                 {
-                    cout << "Conflict detected at cell ("
-                         << i << ", " << j << "): "
-                         << LLTable[i][j] << endl;
+                    cout << "Ambiguity detected in the grammar." << endl;
                     return false;
                 }
             }

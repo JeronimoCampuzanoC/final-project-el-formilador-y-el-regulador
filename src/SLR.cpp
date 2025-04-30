@@ -147,7 +147,7 @@ vector<pair<string, string>> SLR::getAugmentedGrammar()
 }
 
 // Make Table
-void SLR::makeTable()
+bool SLR::makeTable()
 {
     try
     {
@@ -238,11 +238,13 @@ void SLR::makeTable()
                 }
             }
         }
+        return true;
     }
     catch (const std::exception &e)
     {
         // Handle the exception
         std::cout << "Caught an exception: " << e.what() << std::endl;
+        return false;
     }
 }
 
@@ -611,3 +613,4 @@ void SLR::checkString(string str)
         }
     }
 }
+
