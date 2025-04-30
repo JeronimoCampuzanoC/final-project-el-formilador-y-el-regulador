@@ -208,7 +208,7 @@ bool SLR::makeTable()
                     }
                     else
                     {
-                        
+
                         pair<string, string> productionToReduce = states[i].getProductions()[j];
                         // clear the dot from the production
                         productionToReduce.second = production.substr(0, dotPos);
@@ -298,7 +298,7 @@ void SLR::printTable()
         cout << endl;
         for (int j = 0; j < states[i].getProductions().size(); j++)
         {
-            cout << setw(4)<< states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
+            cout << setw(4) << states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
         }
     }
     cout << endl;
@@ -390,12 +390,12 @@ void SLR::follow()
                         }
 
                         // Check if the first character of the production is e
-
+                        
                         for (int o = 0; o < soonToFollow.size(); o++)
                         {
                             if (soonToFollow[o] == "e")
                             {
-                                soonToFollow.erase(soonToFollow.begin() + o);
+                                // soonToFollow.erase(soonToFollow.begin() + o);
                                 // Introduce the remaining elements into the soonToFollow vector
                                 for (int p = 0; p < soonToFollow.size(); p++)
                                 {
