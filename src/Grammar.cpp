@@ -26,7 +26,7 @@ Grammar::Grammar(vector< pair<string, string> > rules) {
             char currentChar = rules[i].second[l];
         
             // Only enters in the for-loop if the character is terminal
-            if (islower(currentChar) && currentChar != 'e') {
+            if (islower(currentChar)) {
                 string currentCharStr(1, currentChar);
                 bool foundTerminal = false;
         

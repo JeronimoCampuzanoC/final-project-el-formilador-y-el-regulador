@@ -5,7 +5,10 @@
 #include <vector>
 #include <string>
 #include <utility>
-
+#include <iomanip>
+#include <tuple>
+#include <unordered_set>
+#include <algorithm>
 using namespace std;
 
 // Constructor
@@ -107,7 +110,7 @@ void SLR::createStates(vector<pair<string, string>> input)
                 {
                     groups.push_back({x1, {{newState.getProductions()[i]}}});
                 }
-                
+
                 // x1 not found, create new group
             }
         }
@@ -146,29 +149,156 @@ vector<pair<string, string>> SLR::getAugmentedGrammar()
 // Make Table
 void SLR::makeTable()
 {
-    int index = 0;
-    for (auto nonTerminal : grammar.getNoTerminals())
+    try
     {
-        noTerminals.insert({nonTerminal, index});
+        int index = 0;
+
+        for (auto terminal : grammar.getTerminals())
+        {
+            terminals.insert({terminal, index});
+            index++;
+        }
+
+        terminals.insert({"$", index});
         index++;
+
+        for (auto nonTerminal : grammar.getNoTerminals())
+        {
+            noTerminals.insert({nonTerminal, index});
+            index++;
+        }
+
+        SLRTable.resize(states.size(), vector<string>(noTerminals.size() + terminals.size(), ""));
+
+        // Read all gotoRegistry, this should put number and shifts
+        for (int i = 0; i < gotoRegistry.size(); i++)
+        {
+            int state = get<0>(gotoRegistry[i]);
+            int nextState = get<1>(gotoRegistry[i]);
+            string symbol = get<2>(gotoRegistry[i]);
+
+            // Check if the symbol is a terminal or non-terminal
+            if (terminals.find(symbol) != terminals.end())
+            {
+                SLRTable[state][terminals[symbol]] = "s" + to_string(nextState);
+            }
+            else
+            {
+                SLRTable[state][noTerminals[symbol]] = to_string(nextState);
+            }
+        }
+
+        // Read all states and productions to set the accept and reduce
+        for (int i = 0; i < states.size(); i++)
+        {
+            for (int j = 0; j < states[i].getProductions().size(); j++)
+            {
+                string production = states[i].getProductions()[j].second;
+                size_t dotPos = production.find('.');
+                if (dotPos != string::npos && dotPos == production.size() - 1)
+                {
+                    // Accept state
+                    if (production == "S.")
+                    {
+                        if (SLRTable[i][terminals["$"]] != "")
+                        {
+                            throw std::runtime_error("Something went wrong!, this is not and slr(1) grammar");
+                        }
+
+                        SLRTable[i][terminals["$"]] = "acc";
+                    }
+                    else
+                    {
+                        pair<string, string> productionToReduce = states[i].getProductions()[j];
+                        // clear the dot from the production
+                        productionToReduce.second = production.substr(0, dotPos);
+                        // search in grammar for the production and get the index
+                        for (int k = 0; k < grammar.getRules().size(); k++)
+                        {
+                            if (grammar.getRules()[k].first == productionToReduce.first && grammar.getRules()[k].second == productionToReduce.second)
+                            {
+                                // Get the follow set for the production
+                                for (int l = 0; l < followSet.size(); l++)
+                                {
+                                    if (followSet[l].first == productionToReduce.first)
+                                    {
+                                        for (int m = 0; m < followSet[l].second.size(); m++)
+                                        {
+                                            if (SLRTable[i][terminals[followSet[l].second[m]]] != "")
+                                            {
+                                                throw std::runtime_error("Something went wrong!, this is not and slr(1) grammar");
+                                            }
+                                            SLRTable[i][terminals[followSet[l].second[m]]] = "r" + to_string(k);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-
-    noTerminals.insert({"$", index});
-    index++;
-
-    for (auto terminal : grammar.getTerminals())
+    catch (const std::exception &e)
     {
-        terminals.insert({terminal, index});
-        index++;
+        // Handle the exception
+        std::cout << "Caught an exception: " << e.what() << std::endl;
     }
-
-    SLRTable.resize(noTerminals.size() + terminals.size(), vector<string>(states.size(), ""));
 }
 
 // Print Table
 void SLR::printTable()
 {
-    // Implementation of table printing
+    // print SRLTable
+    cout << "SLRTable" << endl;
+    // Print column headers
+    cout << setw(4) << " ";
+    for (int i = 0; i < terminals.size(); i++)
+    {
+        for (const auto &pair1 : terminals)
+        {
+            if (pair1.second == i)
+            {
+                std::cout << setw(4) << pair1.first;
+                break;
+            }
+        }
+    }
+    for (int i = terminals.size(); i < noTerminals.size() + terminals.size(); i++)
+    {
+        for (const auto &pair1 : noTerminals)
+        {
+            if (pair1.second == i)
+            {
+                std::cout << setw(4) << pair1.first;
+                break;
+            }
+        }
+    }
+
+    cout << endl;
+
+    for (int i = 0; i < states.size(); i++)
+    {
+        // Print row header
+        cout << setw(4) << states[i].getName();
+        for (int j = 0; j < terminals.size() + noTerminals.size(); j++)
+        {
+            cout << setw(4) << SLRTable[i][j];
+        }
+        cout << endl;
+    }
+
+    cout << "States" << endl;
+    for (int i = 0; i < states.size(); i++)
+    {
+        cout << "State " << states[i].getName() << ": ";
+        for (int j = 0; j < states[i].getProductions().size(); j++)
+        {
+            cout << states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
+        }
+    }
+    cout << endl;
 }
 
 // First Set
@@ -266,7 +396,21 @@ void SLR::follow()
                                 // Introduce the remaining elements into the soonToFollow vector
                                 for (int p = 0; p < soonToFollow.size(); p++)
                                 {
-                                    individualFollowSet.push_back(soonToFollow[p]);
+                                    // Check if the element is not already in the individualFollowSet
+                                    bool found = false;
+                                    for (int a = 0; a < individualFollowSet.size(); a++)
+                                    {
+                                        if (individualFollowSet[a] == soonToFollow[p])
+                                        {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    // If not found, add it to the individualFollowSet
+                                    if (!found)
+                                    {
+                                        individualFollowSet.push_back(soonToFollow[p]);
+                                    }
                                 }
                                 // Check if the next character is a terminal
 
@@ -357,6 +501,23 @@ void SLR::follow()
             // clear followSet for the next iteration
             individualFollowSet.clear();
         }
+    }
+
+    // erase duplicates
+    for (auto &pair : followSet)
+    {
+        unordered_set<string> seen;
+        vector<string> unique;
+
+        for (const auto &val : pair.second)
+        {
+            if (seen.insert(val).second)
+            { // Only insert if not already seen
+                unique.push_back(val);
+            }
+        }
+
+        pair.second = move(unique); // Replace with unique values
     }
 }
 

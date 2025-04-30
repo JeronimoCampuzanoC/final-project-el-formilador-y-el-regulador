@@ -35,10 +35,10 @@ int main()
     SLR slr(grammar);
     slr.augmentedGrammar();
     slr.createStates(vector<pair<string, string>>{make_pair("S'", ".S")});
-    // slr.first();
-    // slr.follow();
-    // slr.makeTable();
-    // slr.printTable();
+    slr.first();
+    slr.follow();
+    slr.makeTable();
+    slr.printTable();
     // slr.checkString("adbc");
     // slr.checkString("aabbcc");
 

@@ -20,3 +20,7 @@ no puede haber first con 2 terminales iguales por ejemplo S -> aA aB  no se pu
 
 
 
+dificultad para la implementacion del metodo goto
+dificultad para la insercion e impresion de la tabla slr
+dificultad para el manejo de los follows en los slr
+
