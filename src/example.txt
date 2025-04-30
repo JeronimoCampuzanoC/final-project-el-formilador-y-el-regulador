@@ -1,2 +1,4 @@
 3
-S ->
+S -> AB
+A -> aA d
+B -> bBc e

@@ -361,6 +361,15 @@ void LL::printTable()
 
 void LL::checkString(string str)
 {
+    // Read the string and verify if it has valid symbols
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (terminals.find(string(1, str[i])) == terminals.end())
+        {
+            cout << "Invalid input symbol: " << str[i] << endl;
+            return;
+        }
+    }
     stack<string> stack;
     stack.push("$");
     stack.push("S");

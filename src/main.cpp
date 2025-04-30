@@ -63,72 +63,51 @@ int main()
         cout << "Select a parser (T: for LL(1), B: for SLR(1), Q: quit):" << endl;
         char in;
         string input;
+
         do
         {
             cout << "Enter your choice: ";
             cin >> in;
+            cin.ignore(); // clear newline left in buffer
+
             if (in == 'T')
             {
                 cout << "Grammar is LL(1)." << endl;
-
                 ll.printTable();
 
                 // ask for a string to check until the user enters an empty string
                 do
                 {
                     cout << "Enter a string to check: ";
-                    cin >> input;
-                    // check if the string valid
-                    ll.checkString(input);
-                } while (input != "");
+                    getline(cin, input);
+                    if (!input.empty())
+                    {
+                        ll.checkString(input);
+                    }
+                } while (!input.empty());
             }
             else if (in == 'B')
             {
                 cout << "Grammar is SLR(1)." << endl;
-
                 slr.printTable();
 
+                // ask for a string to check until the user enters an empty string
                 do
                 {
                     cout << "Enter a string to check: ";
-                    cin >> input;
-                    slr.checkString(input);
-                } while (input != "");
+                    getline(cin, input);
+                    if (!input.empty())
+                    {
+                        slr.checkString(input);
+                    }
+                } while (!input.empty());
             }
             else if (in != 'Q')
             {
                 cout << "Invalid option. Please try again." << endl;
             }
+
         } while (in != 'Q');
-    }
-    else if (isSLR)
-    {
-        string input;
-        cout << "Grammar is SLR(1)." << endl;
-
-        slr.printTable();
-        do
-        {
-            cout << "Enter a string to check: ";
-            cin >> input;
-            ll.checkString(input);
-        } while (input != "");
-    }
-    else if (isLL)
-    {
-        string input;
-        cout << "Grammar is LL(1)." << endl;
-
-        ll.first();
-        ll.follow();
-        ll.makeTable();
-        ll.printTable();
-        do
-        {
-            cout << "Enter a string to check: ";
-            cin >> input;
-            ll.checkString(input);
-        } while (input != "");
     }
     else
     {
