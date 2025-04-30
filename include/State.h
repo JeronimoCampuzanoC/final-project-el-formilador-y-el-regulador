@@ -8,18 +8,17 @@
 
 using namespace std;
 
-class State {
+class State
+{
 public:
-    State(const int& name);
-    void addProduction(vector< pair <string, string> > production);
-    const vector< pair <string, string> >& getProductions() const;
+    State(const int &name);
+    void addProduction(vector<pair<string, string>> production);
+    const vector<pair<string, string>> &getProductions() const;
     int getName();
 
 private:
     int name;
-    vector< pair <string, string> > productions;
+    vector<pair<string, string>> productions;
 };
 
-
-
-#endif 
+#endif

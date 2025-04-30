@@ -4,7 +4,8 @@
 #include <string>
 #include "Grammar.h"
 
-class Reader {
+class Reader
+{
 public:
     Grammar readFile(string fileRoute);
 
@@ -12,4 +13,4 @@ private:
     std::string content;
 };
 
-#endif 
+#endif

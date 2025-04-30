@@ -39,8 +39,22 @@ int main()
     slr.follow();
     slr.makeTable();
     slr.printTable();
-    // slr.checkString("adbc");
-    // slr.checkString("aabbcc");
+    slr.checkString("zbzaz");
+    slr.checkString("");
 
+    // Step 2 Check if the grammar is SLR
+
+    // Step 3 Check if the grammar is LL or SLR
+    // if (slr.isSLR1() && ll.isLL1())
+    // {
+    //     cout << "The Grammar is a SLR and LL Type" << endl;
+    // }
+    // else if (slr.isSLR1()) {
+    //     cout << "The Grammar is a SLR Type" << endl;
+    // } else if (ll.isLL1()) {
+    //     cout << "The Grammar is a LL Type" << endl;
+    // } else {
+    //     cout << "The grammar is neither a SLR Type nor a LL type" << endl;
+    // }
     return 0;
 }

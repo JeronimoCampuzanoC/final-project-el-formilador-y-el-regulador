@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <stack>
 #include "Grammar.h"
 #include "State.h"
 
@@ -23,6 +24,8 @@ public:
 
     vector<pair<string, string>> getAugmentedGrammar();
 
+    bool isSLR1();
+
 private:
     map<string, int> terminals;
     map<string, int> noTerminals;
@@ -33,6 +36,7 @@ private:
     vector<tuple<int, int, string>> gotoRegistry;
 
     vector<vector<string>> SLRTable;
+    stack<string> stack;
     Grammar grammar;
 };
 
