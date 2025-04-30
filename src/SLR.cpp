@@ -426,8 +426,12 @@ void SLR::follow()
                                 else if (k + 2 < production.size() && isupper(production[k + 2]))
                                 {
                                     vector<string> soonToFollow2;
+
+                                    // Iterate through the firstSet vector to find the first set of the non-terminal at position k+2
                                     for (int u = 0; u < firstSet.size(); u++)
                                     {
+
+                                        // If the non-terminal matches, store its first set in soonToFollow2
                                         if (firstSet[u].first == string(1, production[k + 2]))
                                         {
                                             soonToFollow2 = firstSet[u].second;
@@ -435,22 +439,32 @@ void SLR::follow()
                                         }
                                     }
 
+                                    // Add each element of the first set of the non-terminal to the individualFollowSet
                                     for (const auto &elem : soonToFollow2)
                                     {
                                         individualFollowSet.push_back(elem);
                                     }
                                 }
+
+                                // If the character two positions ahead is the end of the production
                                 else if ((k + 2) == production.size())
                                 {
                                     vector<string> secondComp;
+
+                                    // Iterate through the followSet vector to find the follow set of the
+                                    // current rule's non-terminal
                                     for (const auto &p : followSet)
                                     {
                                         if (p.first == grammar.getRules()[j].first && !(p.first == noTerminal))
                                         {
+                                            // If the left-hand side matches and is not the current non-terminal,
+                                            // store its follow set in secondComp and exit the loop
                                             secondComp = p.second;
                                             break;
                                         }
                                     }
+
+                                    // Add each element of the follow set to the individualFollowSet
                                     for (const auto &elem : secondComp)
                                     {
                                         individualFollowSet.push_back(elem);
@@ -459,17 +473,27 @@ void SLR::follow()
                             }
                         }
                     }
+
+                    // If the current character is the last character in the production
                     else if ((k + 1) == production.size())
                     {
                         vector<string> secondComp;
+
+                        // Iterate through the followSet to find the
+                        // follow set of the current rule's non-terminal
                         for (const auto &p : followSet)
                         {
+
+                            // If the left-hand side matches and is not the current non-terminal,
+                            // then store its follow set in secondComp and exit the loop
                             if (p.first == grammar.getRules()[j].first && !(p.first == noTerminal))
                             {
                                 secondComp = p.second;
                                 break;
                             }
                         }
+
+                        // Add each element of the follow set to the individualFollowSet
                         for (const auto &elem : secondComp)
                         {
                             individualFollowSet.push_back(elem);
@@ -477,6 +501,7 @@ void SLR::follow()
                     }
                 }
             }
+
             // If followset is not empty, add it to the followSet vector
             if (individualFollowSet.size() > 0)
             {
@@ -519,9 +544,10 @@ void SLR::follow()
             }
         }
 
-        pair.second = move(unique); // Replace with unique values
+        pair.second = std::move(unique); // Replace with unique values
     }
 }
+
 
 // Check String
 void SLR::checkString(string str)

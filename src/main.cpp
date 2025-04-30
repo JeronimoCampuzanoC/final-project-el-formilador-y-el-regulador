@@ -11,7 +11,7 @@ int main()
 {
     // Step 1 Proccess rules in a txt file
     Reader reader;
-    Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
+    Grammar grammar = reader.readFile("./../src/example.txt");
 
     
     
