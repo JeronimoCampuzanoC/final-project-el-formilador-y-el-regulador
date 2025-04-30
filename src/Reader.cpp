@@ -47,6 +47,8 @@ Grammar Reader::readFile(string fileRoute)
 
     //  pair<string,string>
 
+    cout << "Number of productions: " << numProductions << endl;
+    cout << "Productions:" << endl;
     for (int i = 0; i < numProductions; ++i)
     {
         getline(file, line);
@@ -90,7 +92,7 @@ Grammar Reader::readFile(string fileRoute)
             production_rules.push_back(make_pair(first, palabra));
         }
     }
-
+    cout << "Productions read successfully." << endl;
     Grammar grammar(production_rules);
     return grammar;
 }

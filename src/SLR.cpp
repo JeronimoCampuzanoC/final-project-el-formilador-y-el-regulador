@@ -104,7 +104,6 @@ void SLR::createStates(vector<pair<string, string>> input)
                         group.second.push_back({newState.getProductions()[i]});
                         foundx1 = true;
                     }
-                    std::cout << "group.first: " << group.first << ", x1: " << x1 << std::endl;
                 }
                 if (!foundx1)
                 {
@@ -295,9 +294,10 @@ void SLR::printTable()
     for (int i = 0; i < states.size(); i++)
     {
         cout << "State " << states[i].getName() << ": ";
+        cout << endl;
         for (int j = 0; j < states[i].getProductions().size(); j++)
         {
-            cout << states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
+            cout << setw(4)<< states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
         }
     }
     cout << endl;
@@ -548,7 +548,6 @@ void SLR::follow()
     }
 }
 
-
 // Check String
 void SLR::checkString(string str)
 {
@@ -639,4 +638,3 @@ void SLR::checkString(string str)
         }
     }
 }
-

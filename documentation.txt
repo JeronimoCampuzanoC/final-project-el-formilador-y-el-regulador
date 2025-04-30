@@ -24,3 +24,4 @@ dificultad para la implementacion del metodo goto
 dificultad para la insercion e impresion de la tabla slr
 dificultad para el manejo de los follows en los slr
 
+dificultad para referenciar la ruta relativa del archivo example.txt
