@@ -351,6 +351,7 @@ void LL::printTable()
         // Print row header
         cout << setw(4) << grammar.getNoTerminals()[i];
 
+        // Print the table contents
         for (int j = 0; j < terminals.size(); j++)
         {
             cout << setw(4) << LLTable[i][j];
@@ -370,6 +371,10 @@ void LL::checkString(string str)
             return;
         }
     }
+
+    // Add the end-of-input symbol "$" to the string
+    str += "$";
+    // Initialize the stack with the start symbol and the end-of-input symbol
     stack<string> stack;
     stack.push("$");
     stack.push("S");
@@ -377,6 +382,8 @@ void LL::checkString(string str)
     string currentStringElement;
     string ruleApplied;
     bool success = true;
+
+    // Iterate over the string
     for (int i = 0; i < str.size(); i++)
     {
         currentStringElement = string(1, str[i]);
@@ -389,15 +396,18 @@ void LL::checkString(string str)
             }
             else
             {
+                // Apply the rule at the coordinates defined by the current stack element and the current string element
                 ruleApplied = LLTable[noTerminals[currentStackElement]][terminals[currentStringElement]];
                 stack.pop();
+
+                // Exceptions
                 if (ruleApplied == "")
                 {
                     success = false;
                     i = str.size();
                     break;
                 }
-
+                
                 for (int j = ruleApplied.size() - 1; j >= 0; j--)
                 {
                     if (ruleApplied[j] != 'e')
@@ -409,6 +419,11 @@ void LL::checkString(string str)
         } while (true && success);
         stack.pop();
     }
+    
+    
+    if (!stack.empty()){
+        success = false;
+    } 
     if (success)
     {
         cout << "The string is valid" << endl;
@@ -429,7 +444,7 @@ bool LL::isLL1()
         {
             if (grammar.getRules()[j].first == noTerminal && grammar.getRules()[j].second[0] == noTerminal[0])
             {
-                cout << "Left recursion detected in the grammar." << endl;
+                cout << "Left recursion detected in the grammar. Not LL" << endl;
                 return false;
             }
         }
@@ -443,7 +458,7 @@ bool LL::isLL1()
             {
                 if (firstSet[i].second[j] == firstSet[i].second[k])
                 {
-                    cout << "Ambiguity detected in the grammar." << endl;
+                    cout << "Ambiguity detected in the grammar. Not LL" << endl;
                     return false;
                 }
             }

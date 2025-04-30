@@ -36,10 +36,12 @@ void SLR::augmentedGrammar()
 void SLR::createStates(vector<pair<string, string>> input)
 {
 
+    // Create a new state
     State newState(states.size());
 
     newState.addProduction(input);
 
+    // Apply the closure algorithm
     for (int i = 0; i < newState.getProductions().size(); i++)
     {
         string production = newState.getProductions()[i].second;
@@ -65,6 +67,7 @@ void SLR::createStates(vector<pair<string, string>> input)
             }
         }
     }
+
     // Check if the new state already exists
     bool exists = false;
     for (int i = 0; i < states.size(); i++)
@@ -79,6 +82,7 @@ void SLR::createStates(vector<pair<string, string>> input)
             break;
         }
     }
+
     // If it doesn't exist, add it to the states vector
     if (!exists && !newState.getProductions().empty())
     {
@@ -152,6 +156,7 @@ bool SLR::makeTable()
     {
         int index = 0;
 
+        // Fill the terminals and noTerminals maps
         for (auto terminal : grammar.getTerminals())
         {
             terminals.insert({terminal, index});
@@ -167,6 +172,7 @@ bool SLR::makeTable()
             index++;
         }
 
+        // Create the SLRTable
         SLRTable.resize(states.size(), vector<string>(noTerminals.size() + terminals.size(), ""));
 
         // Read all gotoRegistry, this should put number and shifts
@@ -286,6 +292,7 @@ void SLR::printTable()
         cout << setw(4) << states[i].getName();
         for (int j = 0; j < terminals.size() + noTerminals.size(); j++)
         {
+            // Print the value in the table
             cout << setw(4) << SLRTable[i][j];
         }
         cout << endl;
@@ -301,7 +308,8 @@ void SLR::printTable()
             cout << setw(4) << states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
         }
     }
-    cout << endl;
+    cout << endl
+         << endl;
 }
 
 // First Set
@@ -390,7 +398,7 @@ void SLR::follow()
                         }
 
                         // Check if the first character of the production is e
-                        
+
                         for (int o = 0; o < soonToFollow.size(); o++)
                         {
                             if (soonToFollow[o] == "e")

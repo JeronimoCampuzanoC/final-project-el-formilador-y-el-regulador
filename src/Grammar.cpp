@@ -10,6 +10,7 @@ Grammar::Grammar(vector<pair<string, string>> rules)
     production_rules = rules;
     bool foundTerminal = false;
 
+    // Make sure there are no duplicate non-terminals
     for (int i = 0; i < rules.size(); i++)
     {
         bool foundNoTerminal = false;
@@ -21,12 +22,15 @@ Grammar::Grammar(vector<pair<string, string>> rules)
                 break;
             }
         }
+
+        // If the non-terminal is not found in the vector, add it
         if (!foundNoTerminal)
         {
             noTerminals.push_back(rules[i].first);
         }
         foundNoTerminal = false;
 
+        // Make sure there are no duplicate terminals
         for (int l = 0; l < rules[i].second.size(); l++)
         {
             char currentChar = rules[i].second[l];
