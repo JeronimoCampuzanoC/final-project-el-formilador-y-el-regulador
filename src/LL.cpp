@@ -1,9 +1,14 @@
 #include "LL.h"
-
+#include "Node.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
 #include <stack>
+
+#include <fstream>
+#include <vector>
+
+#include <cstdint>
 using namespace std;
 
 LL::LL(const Grammar &grammar1) : grammar(grammar1)
@@ -375,6 +380,8 @@ void LL::checkString(string str)
         }
     }
 
+    Node *root = new Node("S");
+
     // Add the end-of-input symbol "$" to the string
     str += "$";
     // Initialize the stack with the start symbol and the end-of-input symbol
@@ -431,6 +438,18 @@ void LL::checkString(string str)
                     i = str.size();
                     break;
                 }
+
+                // Search which node is the nontermnal that we are looking for
+                Node *result = findLeftmostLeafWithValue(root, currentStackElement);
+                // Create a node for each of the productions
+                vector<Node *> nodes;
+                for (int r = 0; r < ruleApplied.size(); r++)
+                {
+                    Node *newNode = new Node(string(1, ruleApplied[r]));
+                    nodes.push_back(newNode);
+                }
+
+                result->children = nodes;
 
                 for (int j = ruleApplied.size() - 1; j >= 0; j--)
                 {
@@ -491,6 +510,13 @@ void LL::checkString(string str)
     if (success)
     {
         cout << "The string is valid" << endl;
+        // proccess to print tree
+        ofstream out("n_ary_tree.dot");
+        out << "digraph G {\n";
+        exportDot(root, out);
+        out << "}\n";
+        out.close();
+        cout << "DOT file written. Use `dot -Tpng n_ary_tree.dot -o tree.png` to render." << endl;
     }
     else
     {
@@ -529,4 +555,45 @@ bool LL::isLL1()
         }
     }
     return true;
+}
+
+void LL::exportDot(Node *node, ofstream &out, const string &parentId)
+{
+    if (!node)
+        return;
+
+    string nodeId = "\"" + node->value + "_" + to_string(reinterpret_cast<uintptr_t>(node)) + "\"";
+    out << nodeId << " [label=\"" << node->value << "\"];\n";
+
+    if (!parentId.empty())
+    {
+        out << parentId << " -> " << nodeId << ";\n";
+    }
+
+    for (Node *child : node->children)
+    {
+        exportDot(child, out, nodeId);
+    }
+}
+
+Node* LL::findLeftmostLeafWithValue(Node *root, const string &target)
+{
+    if (!root)
+        return nullptr;
+
+    // Si el nodo coincide con el valor y no tiene hijos, es el que buscamos
+    if (root->value == target && root->children.empty())
+    {
+        return root;
+    }
+
+    // Buscar recursivamente en los hijos en orden
+    for (Node *child : root->children)
+    {
+        Node *result = findLeftmostLeafWithValue(child, target);
+        if (result)
+            return result;
+    }
+
+    return nullptr; // No encontrado
 }

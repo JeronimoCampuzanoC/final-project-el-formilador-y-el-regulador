@@ -55,3 +55,8 @@ Makefile
 # Archivos de sistema (opcional)
 .DS_Store
 Thumbs.db
+
+
+# Files for output image
+*.png
+*.dot

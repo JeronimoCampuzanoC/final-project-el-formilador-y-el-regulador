@@ -7,8 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <cstdint> 
-
+#include <cstdint>
 
 using namespace std;
 
@@ -163,5 +162,4 @@ int main()
     }
     return 0;
 }
-
 

@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include "Grammar.h"
+#include "Node.h"
 
 using namespace std;
 
@@ -18,6 +19,8 @@ public:
     void follow();
     void checkString(string str);
     bool isLL1();
+    Node* findLeftmostLeafWithValue(Node *root, const std::string &target);
+    void exportDot(Node *node, std::ofstream &out, const std::string &parentId = "");
 
 private:
     map<string, int> terminals;
