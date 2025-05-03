@@ -35,7 +35,7 @@
 
 This project implements a parser for formal languages, focusing on **LL(1)** and **SLR(1)** grammars. It provides tools to analyze a grammar, generate parsing tables, and validate strings against the grammar. The project is designed for the implementation of parsing algorithms and grammar analysis.
 
-## Features
+## 📖 Description
 
 - **Grammar Parsing**: Reads grammar rules from a text file and processes them into a usable format.
 - **LL(1) Parsing**:
@@ -90,5 +90,31 @@ Example input file:
   cmake --build .
   ./FinalProject
 ```
+3. Go ahead with some test cases
+```txt
+3
+S -> SaT T
+T -> TbF F
+F -> cSd i
 
+
+iai
+cid
+ciaidbid
+```
+```txt
+3
+S -> AB
+A -> aA d
+B -> bBc e
+
+d
+adbc
+a
+```
+```txt
+2
+S -> A
+A -> A b
+```
 
