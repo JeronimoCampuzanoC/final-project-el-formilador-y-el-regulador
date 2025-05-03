@@ -298,7 +298,7 @@ void SLR::printTable()
         cout << endl;
     }
 
-    cout << "States" << endl;
+    cout << endl << endl << endl << "States" << endl;
     for (int i = 0; i < states.size(); i++)
     {
         cout << "State " << states[i].getName() << ": ";
@@ -307,9 +307,11 @@ void SLR::printTable()
         {
             cout << setw(4) << states[i].getProductions()[j].first << " -> " << states[i].getProductions()[j].second << endl;
         }
+        cout << endl;
     }
     cout << endl
          << endl;
+
 }
 
 // First Set
@@ -576,6 +578,7 @@ void SLR::checkString(string str)
     if (input == "$")
     {
         cout << "The string is empty" << endl;
+        cout << endl;
         return;
     }
 
@@ -592,12 +595,14 @@ void SLR::checkString(string str)
         else
         {
             cout << "Invalid input symbol: " << head_input << endl;
+            cout << endl;
             return;
         }
 
         if (action.empty())
         {
             cout << "The string is rejected" << endl;
+            cout << endl;
             return;
         }
 
@@ -638,11 +643,13 @@ void SLR::checkString(string str)
         else if (action == "acc") // Accept
         {
             cout << "The string is accepted" << endl;
+            cout << endl;
             return;
         }
         else
         {
             cout << "The string is rejected" << endl;
+            cout << endl;
             return;
         }
     }

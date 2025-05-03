@@ -81,7 +81,7 @@ int main()
 
             if (in == 'T')
             {
-                cout << "Grammar is LL(1)." << endl;
+                cout << endl;
                 ll.printTable();
 
                 // ask for a string to check until the user enters an empty string
@@ -97,7 +97,7 @@ int main()
             }
             else if (in == 'B')
             {
-                cout << "Grammar is SLR(1)." << endl;
+                cout << endl;
                 slr.printTable();
 
                 // ask for a string to check until the user enters an empty string

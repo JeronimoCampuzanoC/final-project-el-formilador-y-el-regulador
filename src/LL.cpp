@@ -509,19 +509,33 @@ void LL::checkString(string str)
     }
     if (success)
     {
-        cout << "The string is valid" << endl;
+        cout << "The string is valid" << endl << endl;
         // proccess to print tree
-        ofstream out("n_ary_tree.dot");
+        ofstream out("./images/n_ary_tree.dot");
         out << "digraph G {\n";
         exportDot(root, out);
         out << "}\n";
         out.close();
-        cout << "DOT file written. Use `dot -Tpng n_ary_tree.dot -o tree.png` to render." << endl;
+        int result = system("dot -Tpng ./images/n_ary_tree.dot -o ./images/tree.png");
+
+        if (result == 0)
+        {
+            cout << "tree.png successfully generated!" << endl <<endl;
+            if (system("grep -qi microsoft /proc/version") == 0) {
+                // WSL: open with Windows default image viewer
+                system("powershell.exe /c start $(wslpath -w ./images/tree.png)");
+            }
+        }
+        else
+        {
+            cerr << "Failed to generate PNG. Make sure Graphviz is installed and 'dot' is in your PATH." << std::endl;
+        }
     }
     else
     {
-        cout << "The string is not valid" << endl;
+        cout << "The string is not valid" << endl << endl;
     }
+    cout << endl;
 }
 
 bool LL::isLL1()
@@ -576,7 +590,7 @@ void LL::exportDot(Node *node, ofstream &out, const string &parentId)
     }
 }
 
-Node* LL::findLeftmostLeafWithValue(Node *root, const string &target)
+Node *LL::findLeftmostLeafWithValue(Node *root, const string &target)
 {
     if (!root)
         return nullptr;

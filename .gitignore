@@ -60,3 +60,5 @@ Thumbs.db
 # Files for output image
 *.png
 *.dot
+
+images/

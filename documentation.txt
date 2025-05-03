@@ -30,3 +30,6 @@ dificultad para referenciar la ruta relativa del archivo example.txt
 
 
 dificultad procesando epsilon
+
+
+dificultad procesando el arbol con sus nodos
