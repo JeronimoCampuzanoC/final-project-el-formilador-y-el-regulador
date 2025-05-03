@@ -328,7 +328,7 @@ void LL::makeTable()
 void LL::printTable()
 {
     cout << "LLTable" << endl;
-    
+
     // Print column headers
     cout << setw(4) << " ";
 
@@ -364,6 +364,8 @@ void LL::printTable()
 void LL::checkString(string str)
 {
     // Read the string and verify if it has valid symbols
+    cout << endl;
+
     for (int i = 0; i < str.size(); i++)
     {
         if (terminals.find(string(1, str[i])) == terminals.end())
@@ -376,13 +378,34 @@ void LL::checkString(string str)
     // Add the end-of-input symbol "$" to the string
     str += "$";
     // Initialize the stack with the start symbol and the end-of-input symbol
-    stack<string> stack;
-    stack.push("$");
-    stack.push("S");
+    stack<string> parsingStack;
+    parsingStack.push("$");
+    parsingStack.push("S");
     string currentStackElement;
     string currentStringElement;
     string ruleApplied;
     bool success = true;
+
+    cout << left << setw(20) << "Current string" << "| " << "Current stack" << endl;
+    cout << string(20, '-') << "+----------------" << endl;
+    string currentString = str;
+
+    cout << left << setw(20) << currentString << "| ";
+
+    stack<string> tempStack = parsingStack;
+    vector<string> stackContents;
+
+    while (!tempStack.empty())
+    {
+        stackContents.push_back(tempStack.top());
+        tempStack.pop();
+    }
+
+    for (const string &s : stackContents)
+    {
+        cout << s << " ";
+    }
+    cout << endl;
 
     // Iterate over the string
     for (int i = 0; i < str.size(); i++)
@@ -390,7 +413,7 @@ void LL::checkString(string str)
         currentStringElement = string(1, str[i]);
         do
         {
-            currentStackElement = stack.top();
+            currentStackElement = parsingStack.top();
             if (islower(currentStackElement[0]) || currentStackElement == "$")
             {
                 break;
@@ -399,7 +422,7 @@ void LL::checkString(string str)
             {
                 // Apply the rule at the coordinates defined by the current stack element and the current string element
                 ruleApplied = LLTable[noTerminals[currentStackElement]][terminals[currentStringElement]];
-                stack.pop();
+                parsingStack.pop();
 
                 // Exceptions
                 if (ruleApplied == "")
@@ -408,23 +431,63 @@ void LL::checkString(string str)
                     i = str.size();
                     break;
                 }
-                
+
                 for (int j = ruleApplied.size() - 1; j >= 0; j--)
                 {
                     if (ruleApplied[j] != 'e')
                     {
-                        stack.push(string(1, ruleApplied[j]));
+                        parsingStack.push(string(1, ruleApplied[j]));
                     }
                 }
+
+                cout << left << setw(20) << currentString << "| ";
+
+                tempStack = parsingStack;
+                vector<string> stackContents;
+
+                while (!tempStack.empty())
+                {
+                    stackContents.push_back(tempStack.top());
+                    tempStack.pop();
+                }
+
+                for (const string &s : stackContents)
+                {
+                    cout << s << " ";
+                }
+                cout << endl;
             }
+
         } while (true && success);
-        stack.pop();
+        parsingStack.pop();
+
+        cout << left << setw(20) << currentString << "| ";
+
+        tempStack = parsingStack;
+        vector<string> stackContents;
+
+        while (!tempStack.empty())
+        {
+            stackContents.push_back(tempStack.top());
+            tempStack.pop();
+        }
+
+        for (const string &s : stackContents)
+        {
+            cout << s << " ";
+        }
+        cout << endl;
+
+        if (!currentString.empty())
+        {
+            currentString.erase(0, 1);
+        }
     }
-    
-    
-    if (!stack.empty()){
+
+    if (!parsingStack.empty())
+    {
         success = false;
-    } 
+    }
     if (success)
     {
         cout << "The string is valid" << endl;

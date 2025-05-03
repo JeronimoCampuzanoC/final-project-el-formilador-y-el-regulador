@@ -4,6 +4,11 @@
 #include "LL.h"
 #include "SLR.h"
 #include <string>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <cstdint> 
+
 
 using namespace std;
 
@@ -158,3 +163,5 @@ int main()
     }
     return 0;
 }
+
+
