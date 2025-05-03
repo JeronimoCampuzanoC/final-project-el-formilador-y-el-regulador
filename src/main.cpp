@@ -34,7 +34,9 @@ int main()
     // Step 1 Proccess rules in a txt file and store them in grammar
     Reader reader;
     Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
-    cout  << endl << endl;
+    cout << endl
+         << endl;
+
     // Step 2 Check if the grammar is SLR(1) or LL(1)
     // Create LL and SLR objects
     LL ll(grammar);
@@ -52,10 +54,12 @@ int main()
     bool isLL = ll.isLL1();
     if (isLL == true)
     {
-        
+
         ll.makeTable();
     }
-    cout  << endl << endl;
+    cout << endl
+         << endl;
+
     // Step 3 Start processing the strings according to the type of grammar
     if (isSLR && isLL)
     {

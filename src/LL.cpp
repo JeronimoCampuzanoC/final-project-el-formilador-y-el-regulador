@@ -323,11 +323,12 @@ void LL::makeTable()
             }
         }
     }
-    cout << "LLTable" << endl;
 }
 
 void LL::printTable()
 {
+    cout << "LLTable" << endl;
+    
     // Print column headers
     cout << setw(4) << " ";
 
