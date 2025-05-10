@@ -298,7 +298,10 @@ void SLR::printTable()
         cout << endl;
     }
 
-    cout << endl << endl << endl << "States" << endl;
+    cout << endl
+         << endl
+         << endl
+         << "States" << endl;
     for (int i = 0; i < states.size(); i++)
     {
         cout << "State " << states[i].getName() << ": ";
@@ -311,7 +314,6 @@ void SLR::printTable()
     }
     cout << endl
          << endl;
-
 }
 
 // First Set
@@ -566,12 +568,12 @@ void SLR::checkString(string str)
 
     string input = str;
     input += "$";
-    stack<string> stack;
-    stack.push("0");
+    stack<string> parsingStack;
+    parsingStack.push("0");
     int index = 0;
     string action = "";
     string state = "";
-    string top_stack = stack.top();
+    string top_stack = parsingStack.top();
     string head_input = input.substr(index, 1);
 
     // Check if the string is empty
@@ -582,9 +584,30 @@ void SLR::checkString(string str)
         return;
     }
 
+    cout << left << setw(20) << "Current string" << "| " << "Current stack" << endl;
+    cout << string(20, '-') << "+----------------" << endl;
+    string currentString = input;
+
+    cout << left << setw(20) << currentString << "| ";
+
+    stack<string> tempStack = parsingStack;
+    vector<string> stackContents;
+
+    while (!tempStack.empty())
+    {
+        stackContents.push_back(tempStack.top());
+        tempStack.pop();
+    }
+
+    for (const string &s : stackContents)
+    {
+        cout << s << " ";
+    }
+    cout << endl;
+
     while (true)
     {
-        top_stack = stack.top();
+        top_stack = parsingStack.top();
         head_input = input.substr(index, 1);
 
         // Get the action from the SLR table
@@ -609,9 +632,28 @@ void SLR::checkString(string str)
         if (action[0] == 's') // Shift
         {
             string next_state = action.substr(1);
-            stack.push(head_input);
-            stack.push(next_state);
+            parsingStack.push(head_input);
+            parsingStack.push(next_state);
             index++;
+
+            currentString.erase(0, 1);
+
+            cout << left << setw(20) << currentString << "| ";
+
+            tempStack = parsingStack;
+            vector<string> stackContents;
+
+            while (!tempStack.empty())
+            {
+                stackContents.push_back(tempStack.top());
+                tempStack.pop();
+            }
+
+            for (const string &s : stackContents)
+            {
+                cout << s << " ";
+            }
+            cout << endl;
         }
         else if (action[0] == 'r') // Reduce
         {
@@ -623,28 +665,62 @@ void SLR::checkString(string str)
             // Pop 2 * |rhs| elements from the stack
             for (int i = 0; i < 2 * rhs.size(); i++)
             {
-                stack.pop();
+                parsingStack.pop();
             }
 
-            top_stack = stack.top();
-            stack.push(lhs);
+            top_stack = parsingStack.top();
+            parsingStack.push(lhs);
 
             // Push the goto state
             if (noTerminals.find(lhs) != noTerminals.end())
             {
-                stack.push(SLRTable[stoi(top_stack)][noTerminals[lhs]]);
+                parsingStack.push(SLRTable[stoi(top_stack)][noTerminals[lhs]]);
             }
             else
             {
                 cout << "Error: Invalid non-terminal in reduction" << endl;
                 return;
             }
+
+            cout << left << setw(20) << currentString << "| ";
+
+            tempStack = parsingStack;
+            vector<string> stackContents;
+
+            while (!tempStack.empty())
+            {
+                stackContents.push_back(tempStack.top());
+                tempStack.pop();
+            }
+
+            for (const string &s : stackContents)
+            {
+                cout << s << " ";
+            }
+            cout << endl;
         }
         else if (action == "acc") // Accept
         {
             cout << "The string is accepted" << endl;
             cout << endl;
             return;
+
+            cout << left << setw(20) << currentString << "| ";
+
+            tempStack = parsingStack;
+            vector<string> stackContents;
+
+            while (!tempStack.empty())
+            {
+                stackContents.push_back(tempStack.top());
+                tempStack.pop();
+            }
+
+            for (const string &s : stackContents)
+            {
+                cout << s << " ";
+            }
+            cout << endl;
         }
         else
         {

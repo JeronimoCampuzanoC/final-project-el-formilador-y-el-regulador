@@ -37,7 +37,7 @@ int main()
 
     // Step 1 Proccess rules in a txt file and store them in grammar
     Reader reader;
-    Grammar grammar = reader.readFile("/home/jerocrackh/dev/university/lenguajes-formales/final-project-el-formilador-y-el-regulador/src/example.txt");
+    Grammar grammar = reader.readFile("/Users/andresperezquinchia/Universidad/assignment2-el-formilador-y-el-regulador/final-project-el-formilador-y-el-regulador/src/example.txt");
     cout << endl
          << endl;
 
